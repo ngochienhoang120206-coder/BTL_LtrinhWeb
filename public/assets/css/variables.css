@@ -1,0 +1,50 @@
+:root {
+  /* 1. Primary */
+  --color-primary: #2E6F40;
+  --color-primary-hover: #235732;
+  --color-primary-soft: #E8F3EC;
+
+  /* 2. Secondary / Accent */
+  --color-accent: #E07A2F;
+  --color-accent-hover: #C86720;
+  --color-accent-soft: #FFF3E8;
+  --color-star: #EAB308;
+
+  /* 3. Neutral */
+  --bg-white: #FFFFFF;
+  --bg-client-soft: #F7FAF8;
+  --bg-admin: #F8FAFC;
+  --text-heading: #183A22;
+  --text-body: #1E293B;
+  --text-muted: #64748B;
+
+  /* 4. Semantic */
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+  --color-warning: #D97706;
+  --color-info: #0284C7;
+
+  /* 5. Category Tags */
+  --tag-juice-text: #C2410C;
+  --tag-juice-bg: #FFEDD5;
+  --tag-smoothie-text: #BE185D;
+  --tag-smoothie-bg: #FCE7F3;
+  --tag-detox-text: #0F766E;
+  --tag-detox-bg: #CCFBF1;
+
+  /* 6. Borders & Admin */
+  --border-client: #D8E4DC;
+  --border-admin: #E2E8F0;
+  --admin-sidebar: #183A22;
+
+  /* Typography */
+  --font-heading: 'Lora', Georgia, serif;
+  --font-body: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout Tokens */
+  --container-max: 1200px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 4px 16px rgba(24, 58, 34, 0.06);
+}

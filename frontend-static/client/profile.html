@@ -1,0 +1,126 @@
+<!--Chỉ cần giữ nguyên <header> và <footer>, chuyển class is-active sang đúng mục menu của trang đó và viết nội dung riêng trong <main>-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Công ty TNHH Verde Sana — Build-Your-Own Salad kết hợp Sauce tự chọn, Cold-Pressed Juice, Smoothie và Detox nguyên chất.">
+  <meta name="keywords" content="Verde Sana, salad tự trộn, nước ép lạnh, cold-pressed juice, smoothie, detox">
+  <title>Tên trang — Công ty TNHH Verde Sana</title>
+
+  <!-- Google Fonts chuẩn Tiếng Việt: Lora (Tiêu đề) & Be Vietnam Pro (Nội dung) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS dùng chung từ public/assets/ -->
+  <link rel="stylesheet" href="../../public/assets/css/variables.css">
+  <link rel="stylesheet" href="../../public/assets/css/client.css">
+  <!-- Thêm CSS riêng của từng trang bên dưới dòng này nếu cần -->
+</head>
+<body>
+  <!-- ==================== THANH THÔNG TIN NHANH ==================== -->
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <span>Tươi mới mỗi ngày — Giao lạnh nội thành trong 45 phút</span>
+      <span>Hotline: <a href="tel:02838689999">028 3868 9999</a> | Giờ mở cửa: 07:00 – 21:00</span>
+    </div>
+  </div>
+
+  <!-- ==================== HEADER & MENU RESPONSIVE ==================== -->
+  <header id="siteHeader" class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Công ty TNHH Verde Sana" width="42" height="42">
+        <span class="brand__text">
+          <span class="brand__name">Verde Sana</span>
+          <span class="brand__tagline">FRESH SALAD & COLD-PRESSED</span>
+        </span>
+      </a>
+
+      <nav id="mainNav" class="main-nav" aria-label="Điều hướng chính">
+        <ul class="main-nav__list">
+          <li><a class="main-nav__link is-active" href="index.html">Trang chủ</a></li>
+          <li><a class="main-nav__link" href="about.html">Giới thiệu</a></li>
+          <li><a class="main-nav__link" href="products.html">Thực đơn</a></li>
+          <li><a class="main-nav__link main-nav__link--accent" href="salad-builder.html">Tự trộn Salad & Bảng giá</a></li>
+          <li><a class="main-nav__link" href="news.html">Tin tức</a></li>
+          <li><a class="main-nav__link" href="faq.html">Hỏi/đáp</a></li>
+          <li><a class="main-nav__link" href="contact.html">Liên hệ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="cart.html" class="cart-btn" aria-label="Giỏ hàng của bạn">
+          <span>Giỏ hàng</span>
+          <span class="cart-btn__badge">0</span>
+        </a>
+        <a href="login.html" class="btn btn--outline">Đăng nhập</a>
+        <a href="register.html" class="btn btn--primary">Đăng ký</a>
+        <button id="mobileMenuToggle" class="mobile-toggle" type="button" aria-label="Mở menu điều hướng" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== NỘI DUNG RIÊNG CỦA TỪNG TRANG ==================== -->
+  <main class="site-main">
+    <div class="container" style="padding-top: 40px; padding-bottom: 40px;">
+      <!-- Thành viên viết toàn bộ nội dung trang của mình tại đây -->
+      <h1>Tiêu đề trang mẫu</h1>
+      <p>Thay thế vùng này bằng nội dung HTML5 chuẩn W3C của trang tương ứng.</p>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER DÙNG CHUNG ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-title">Công ty TNHH Verde Sana</h2>
+          <p class="footer-text">Chuyên cung cấp mô hình Build-Your-Own Salad kết hợp Sauce tự chọn, nước ép lạnh (Cold-Pressed Juice), sinh tố dinh dưỡng (Smoothie) và liệu trình Detox nguyên chất.</p>
+          <p class="footer-text">Địa chỉ: 268 Lý Thường Kiệt, Quận 10, TP. Hồ Chí Minh</p>
+        </div>
+
+        <div>
+          <h2 class="footer-title">Khám phá</h2>
+          <ul class="footer-links">
+            <li><a href="about.html">Về Verde Sana</a></li>
+            <li><a href="products.html">Thực đơn Sản phẩm</a></li>
+            <li><a href="salad-builder.html">Tự trộn Salad & Bảng giá</a></li>
+            <li><a href="news.html">Kiến thức dinh dưỡng</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="footer-title">Hỗ trợ khách hàng</h2>
+          <ul class="footer-links">
+            <li><a href="faq.html">Câu hỏi thường gặp (FAQ)</a></li>
+            <li><a href="contact.html">Liên hệ & Đặt tiệc doanh nghiệp</a></li>
+            <li><a href="profile.html">Tài khoản thành viên</a></li>
+            <li><a href="my-orders.html">Tra cứu lịch sử đơn hàng</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="footer-title">Liên hệ nhanh</h2>
+          <p class="footer-text">Email: lienhe@verdesana.vn</p>
+          <p class="footer-text">Hotline: 028 3868 9999</p>
+          <p class="footer-text">Thời gian phục vụ: 07:00 – 21:00 (Thứ 2 – Chủ nhật)</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom__inner">
+          <span>© 2026 Công ty TNHH Verde Sana. Bảo lưu mọi quyền.</span>
+          <span>Chuẩn HTML5/CSS3 W3C • Thiết kế Responsive</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS dùng chung từ public/assets/ -->
+  <script src="../../public/assets/js/main.js"></script>
+  <script src="../../public/assets/js/validator.js"></script>
+  <!-- Thêm JS riêng của từng trang (vd: salad-builder.js, cart.js, upload-preview.js) bên dưới -->
+</body>
+</html>

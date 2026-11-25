@@ -1,0 +1,178 @@
+<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
+<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
+<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
+<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
+<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản trị — Công ty TNHH Verde Sana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 1. Tailadmin Free HTML CSS (đã build tĩnh) -->
+  <link rel="stylesheet" href="../../public/assets/vendor/tailadmin/css/style.css">
+  <!-- 2. Biến màu & tùy biến thương hiệu Verde Sana -->
+  <link rel="stylesheet" href="../../public/assets/css/variables.css">
+  <link rel="stylesheet" href="../../public/assets/css/admin-custom.css">
+</head>
+<body class="admin-body">
+  <div id="adminOverlay" class="admin-overlay" aria-hidden="true"></div>
+
+  <div class="admin-wrapper">
+    <!-- ==================== SIDEBAR DÙNG CHUNG ==================== -->
+    <aside id="adminSidebar" class="admin-sidebar" aria-label="Menu quản trị">
+      <div class="admin-sidebar__brand">
+        <a href="dashboard.html" class="admin-sidebar__logo">
+          <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
+          <span>Verde Sana Admin</span>
+        </a>
+        <button id="adminSidebarClose" class="admin-sidebar__close" type="button" aria-label="Đóng menu">×</button>
+      </div>
+
+      <nav class="admin-nav">
+        <p class="admin-nav__group">Tổng quan</p>
+        <ul class="admin-nav__list">
+          <li><a class="admin-nav__link is-active" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
+        </ul>
+
+        <p class="admin-nav__group">Hệ thống & Liên hệ (TV1)</p>
+        <ul class="admin-nav__list">
+          <li><a class="admin-nav__link" href="settings.html"><span>Cấu hình & Trang chủ</span><span class="admin-nav__tag">R1</span></a></li>
+          <li><a class="admin-nav__link" href="contacts.html"><span>Liên hệ khách hàng</span><span class="admin-nav__tag">R1</span></a></li>
+        </ul>
+
+        <p class="admin-nav__group">Người dùng & Nội dung (TV2)</p>
+        <ul class="admin-nav__list">
+          <li><a class="admin-nav__link" href="users.html"><span>Quản lý người dùng</span><span class="admin-nav__tag">C6</span></a></li>
+          <li><a class="admin-nav__link" href="about.html"><span>Trang Giới thiệu</span><span class="admin-nav__tag">R2</span></a></li>
+          <li><a class="admin-nav__link" href="faqs.html"><span>Câu hỏi Hỏi/đáp (FAQ)</span><span class="admin-nav__tag">R2</span></a></li>
+        </ul>
+
+        <p class="admin-nav__group">Kinh doanh & Salad (TV3)</p>
+        <ul class="admin-nav__list">
+          <li><a class="admin-nav__link" href="products.html"><span>Sản phẩm & Bảng giá</span><span class="admin-nav__tag">R3</span></a></li>
+          <li><a class="admin-nav__link" href="orders.html"><span>Giỏ hàng & Đơn hàng</span><span class="admin-nav__tag">R3</span></a></li>
+        </ul>
+
+        <p class="admin-nav__group">Tin tức & Cộng đồng (TV4)</p>
+        <ul class="admin-nav__list">
+          <li><a class="admin-nav__link" href="news.html"><span>Tin tức & SEO</span><span class="admin-nav__tag">R4</span></a></li>
+          <li><a class="admin-nav__link" href="comments.html"><span>Bình luận & Đánh giá</span><span class="admin-nav__tag">R4</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ==================== VÙNG NỘI DUNG CHÍNH ==================== -->
+    <div class="admin-main">
+      <!-- TOPBAR DÙNG CHUNG -->
+      <header class="admin-topbar">
+        <div class="admin-topbar__left">
+          <button id="adminMenuToggle" class="admin-menu-toggle" type="button" aria-label="Mở menu quản trị" aria-expanded="false">☰</button>
+          <p class="admin-breadcrumb">Quản trị / <strong>Tên phân hệ hiện tại</strong></p>
+        </div>
+
+        <div class="admin-topbar__right">
+          <a href="../client/index.html" class="admin-btn admin-btn--info admin-btn--sm">Xem trang khách</a>
+          <div class="admin-user-menu">
+            <button id="adminUserTrigger" class="admin-user-trigger" type="button" aria-expanded="false">
+              <span class="admin-user-avatar">AD</span>
+              <span>Quản trị viên</span>
+            </button>
+            <div id="adminUserDropdown" class="admin-user-dropdown">
+              <a href="../client/profile.html">Hồ sơ cá nhân</a>
+              <a href="../client/login.html">Đăng xuất</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- NỘI DUNG TỪNG TRANG ADMIN (BẢNG MẪU CÓ PHÂN TRANG) -->
+      <main class="admin-content">
+        <div class="admin-page-head">
+          <h1 class="admin-page-title">Danh sách quản lý mẫu</h1>
+          <a href="#them-moi" class="admin-btn admin-btn--primary">+ Thêm mới</a>
+        </div>
+
+        <section class="admin-card" aria-label="Bảng dữ liệu quản trị">
+          <!-- Thanh tìm kiếm & lọc -->
+          <div class="admin-toolbar">
+            <form class="admin-filter-form" action="#" method="get" data-validate="true">
+              <input class="admin-input" type="search" name="keyword" placeholder="Tìm kiếm theo từ khóa..." aria-label="Tìm kiếm theo từ khóa">
+              <select class="admin-select" name="status" aria-label="Lọc theo trạng thái">
+                <option value="">Tất cả trạng thái</option>
+                <option value="active">Đang hoạt động</option>
+                <option value="hidden">Tạm ẩn</option>
+              </select>
+              <button class="admin-btn admin-btn--primary" type="submit">Tìm kiếm</button>
+            </form>
+          </div>
+
+          <!-- Bảng dữ liệu mẫu -->
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên mục / Tiêu đề</th>
+                  <th>Phân loại</th>
+                  <th>Ngày cập nhật</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#001</td>
+                  <td><strong>Salad Cá Hồi Sốt Mè Rang</strong></td>
+                  <td>Salad</td>
+                  <td>25/11/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <a href="#sua-1" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #001?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>#002</td>
+                  <td><strong>Cold-Pressed Cần Tây Táo Xanh 500ml</strong></td>
+                  <td>Cold-Pressed Juice</td>
+                  <td>25/11/2026</td>
+                  <td><span class="admin-badge admin-badge--warning">Chờ duyệt</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <a href="#sua-2" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #002?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Thanh phân trang chuẩn (Pagination) -->
+          <div class="admin-pagination-bar">
+            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 42 bản ghi</p>
+            <nav aria-label="Phân trang dữ liệu">
+              <ul class="admin-pagination">
+                <li><a class="admin-pagination__link is-disabled" href="#">« Trước</a></li>
+                <li><a class="admin-pagination__link is-active" href="?page=1" aria-current="page">1</a></li>
+                <li><a class="admin-pagination__link" href="?page=2">2</a></li>
+                <li><a class="admin-pagination__link" href="?page=3">3</a></li>
+                <li><a class="admin-pagination__link" href="?page=2">Sau »</a></li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="../../public/assets/js/admin.js"></script>
+  <script src="../../public/assets/js/validator.js"></script>
+</body>
+</html>

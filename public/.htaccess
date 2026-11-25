@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Không chuyển hướng nếu tệp hoặc thư mục vật lý thực sự tồn tại (CSS, JS, ảnh)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Đưa mọi request còn lại về Front Controller
+RewriteRule ^(.*)$ index.php [QSA,L]

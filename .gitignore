@@ -1,0 +1,13 @@
+# Biến môi trường nhạy cảm
+.env
+
+# Rác hệ điều hành & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Bỏ qua ảnh người dùng upload thử nghiệm nhưng vẫn giữ cấu trúc thư mục rỗng bằng .gitkeep
+public/uploads/*/*
+!public/uploads/*/.gitkeep
