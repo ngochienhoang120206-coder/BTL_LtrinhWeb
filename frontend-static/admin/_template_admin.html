@@ -1,14 +1,11 @@
-<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
-<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
-<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
-<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
-<!--FILE NÀY LÀ FILE MẪU, KHÔNG CHỈNH SỬA-->
 <!DOCTYPE html>
 <html lang="vi">
+<!-- FILE NÀY LÀ FILE MẪU DÙNG CHUNG, KHÔNG CHỈNH SỬA TRỰC TIẾP (COPY RA FILE MỚI ĐỂ CODE NẾU CẦN) -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quản trị — Công ty TNHH Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +23,7 @@
     <aside id="adminSidebar" class="admin-sidebar" aria-label="Menu quản trị">
       <div class="admin-sidebar__brand">
         <a href="dashboard.html" class="admin-sidebar__logo">
-          <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
+          <img src="../../public/assets/images/brand/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
           <span>Verde Sana Admin</span>
         </a>
         <button id="adminSidebarClose" class="admin-sidebar__close" type="button" aria-label="Đóng menu">×</button>
@@ -115,7 +112,7 @@
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Mã</th>
                   <th>Tên mục / Tiêu đề</th>
                   <th>Phân loại</th>
                   <th>Ngày cập nhật</th>
@@ -125,28 +122,28 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>#001</td>
-                  <td><strong>Salad Cá Hồi Sốt Mè Rang</strong></td>
+                  <td>SP002</td>
+                  <td><strong>Chicken Balance Salad</strong></td>
                   <td>Salad</td>
                   <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td><span class="admin-badge admin-badge--success">Đang bán</span></td>
                   <td>
                     <div class="admin-actions">
                       <a href="#sua-1" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #001?">Xóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục SP002?">Xóa</button>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td>#002</td>
-                  <td><strong>Cold-Pressed Cần Tây Táo Xanh 500ml</strong></td>
+                  <td>SP003</td>
+                  <td><strong>Green Detox Juice</strong></td>
                   <td>Cold-Pressed Juice</td>
                   <td>25/11/2026</td>
                   <td><span class="admin-badge admin-badge--warning">Chờ duyệt</span></td>
                   <td>
                     <div class="admin-actions">
                       <a href="#sua-2" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #002?">Xóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục SP003?">Xóa</button>
                     </div>
                   </td>
                 </tr>
@@ -156,7 +153,7 @@
 
           <!-- Thanh phân trang chuẩn (Pagination) -->
           <div class="admin-pagination-bar">
-            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 42 bản ghi</p>
+            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 24 bản ghi</p>
             <nav aria-label="Phân trang dữ liệu">
               <ul class="admin-pagination">
                 <li><a class="admin-pagination__link is-disabled" href="#">« Trước</a></li>

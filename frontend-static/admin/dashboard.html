@@ -1,10 +1,10 @@
-<!--giữ nguyên phần Sidebar + Topbar, chỉ thay đổi tiêu đề và ruột bên trong <main>-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản trị — Công ty TNHH Verde Sana</title>
+  <title>Bảng điều khiển — Quản trị Công ty TNHH Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
     <aside id="adminSidebar" class="admin-sidebar" aria-label="Menu quản trị">
       <div class="admin-sidebar__brand">
         <a href="dashboard.html" class="admin-sidebar__logo">
-          <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
+          <img src="../../public/assets/images/brand/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
           <span>Verde Sana Admin</span>
         </a>
         <button id="adminSidebarClose" class="admin-sidebar__close" type="button" aria-label="Đóng menu">×</button>
@@ -67,7 +67,7 @@
       <header class="admin-topbar">
         <div class="admin-topbar__left">
           <button id="adminMenuToggle" class="admin-menu-toggle" type="button" aria-label="Mở menu quản trị" aria-expanded="false">☰</button>
-          <p class="admin-breadcrumb">Quản trị / <strong>Tên phân hệ hiện tại</strong></p>
+          <p class="admin-breadcrumb">Quản trị / <strong>Bảng điều khiển</strong></p>
         </div>
 
         <div class="admin-topbar__right">
@@ -85,83 +85,115 @@
         </div>
       </header>
 
-      <!-- NỘI DUNG TỪNG TRANG ADMIN (BẢNG MẪU CÓ PHÂN TRANG) -->
+      <!-- NỘI DUNG TRANG DASHBOARD -->
       <main class="admin-content">
         <div class="admin-page-head">
-          <h1 class="admin-page-title">Danh sách quản lý mẫu</h1>
-          <a href="#them-moi" class="admin-btn admin-btn--primary">+ Thêm mới</a>
+          <h1 class="admin-page-title">Bảng điều khiển tổng quan</h1>
+          <a href="settings.html" class="admin-btn admin-btn--primary">Cấu hình website</a>
         </div>
 
-        <section class="admin-card" aria-label="Bảng dữ liệu quản trị">
-          <!-- Thanh tìm kiếm & lọc -->
-          <div class="admin-toolbar">
-            <form class="admin-filter-form" action="#" method="get" data-validate="true">
-              <input class="admin-input" type="search" name="keyword" placeholder="Tìm kiếm theo từ khóa..." aria-label="Tìm kiếm theo từ khóa">
-              <select class="admin-select" name="status" aria-label="Lọc theo trạng thái">
-                <option value="">Tất cả trạng thái</option>
-                <option value="active">Đang hoạt động</option>
-                <option value="hidden">Tạm ẩn</option>
-              </select>
-              <button class="admin-btn admin-btn--primary" type="submit">Tìm kiếm</button>
-            </form>
+        <!-- Thông báo chào mừng & nhắc việc -->
+        <div class="admin-alert" role="status">
+          <strong>Chào mừng đến với hệ thống quản trị Verde Sana.</strong> Hiện có <strong>12 đơn hàng mới</strong> cần kiểm tra và <strong>5 liên hệ chưa đọc</strong>.
+        </div>
+
+        <!-- 4 Thẻ thống kê tổng quan -->
+        <section class="admin-stats-grid" aria-label="Thống kê tổng quan">
+          <article class="admin-stat-card">
+            <h2 class="admin-stat-card__label">Tổng đơn hàng mới</h2>
+            <p class="admin-stat-card__value">12</p>
+            <a class="admin-stat-card__meta" href="orders.html">Xem danh sách đơn hàng →</a>
+          </article>
+
+          <article class="admin-stat-card">
+            <h2 class="admin-stat-card__label">Tổng sản phẩm</h2>
+            <p class="admin-stat-card__value">24</p>
+            <a class="admin-stat-card__meta" href="products.html">Quản lý thực đơn →</a>
+          </article>
+
+          <article class="admin-stat-card">
+            <h2 class="admin-stat-card__label">Tổng thành viên</h2>
+            <p class="admin-stat-card__value">156</p>
+            <a class="admin-stat-card__meta" href="users.html">Quản lý tài khoản →</a>
+          </article>
+
+          <article class="admin-stat-card">
+            <h2 class="admin-stat-card__label">Liên hệ chưa đọc</h2>
+            <p class="admin-stat-card__value">5</p>
+            <a class="admin-stat-card__meta" href="contacts.html">Xử lý liên hệ →</a>
+          </article>
+        </section>
+
+        <!-- Lối tắt quản trị nhanh -->
+        <section class="admin-section-box" aria-label="Lối tắt quản trị nhanh">
+          <h2 class="admin-section-box__title">Lối tắt quản trị nhanh</h2>
+          <div class="admin-quick-links">
+            <a href="products.html" class="admin-btn admin-btn--primary">Quản lý sản phẩm</a>
+            <a href="orders.html" class="admin-btn admin-btn--info">Quản lý đơn hàng</a>
+            <a href="users.html" class="admin-btn admin-btn--info">Quản lý người dùng</a>
+            <a href="contacts.html" class="admin-btn admin-btn--warning">Quản lý liên hệ</a>
+            <a href="news.html" class="admin-btn admin-btn--info">Quản lý tin tức</a>
+          </div>
+        </section>
+
+        <!-- Bảng đơn hàng gần đây -->
+        <section class="admin-card" aria-label="Đơn hàng gần đây">
+          <div class="admin-card-head">
+            <h2 class="admin-card-head__title">Đơn hàng gần đây</h2>
+            <a href="orders.html" class="admin-btn admin-btn--info admin-btn--sm">Xem tất cả</a>
           </div>
 
-          <!-- Bảng dữ liệu mẫu -->
           <div class="admin-table-wrap">
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Tên mục / Tiêu đề</th>
-                  <th>Phân loại</th>
-                  <th>Ngày cập nhật</th>
+                  <th>Mã đơn</th>
+                  <th>Khách hàng</th>
+                  <th>Ngày đặt</th>
+                  <th>Tổng tiền</th>
                   <th>Trạng thái</th>
                   <th>Thao tác</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>#001</td>
-                  <td><strong>Salad Cá Hồi Sốt Mè Rang</strong></td>
-                  <td>Salad</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td><strong>VS1001</strong></td>
+                  <td>Nguyễn Minh Anh</td>
+                  <td>20/11/2026</td>
+                  <td>318.000đ</td>
+                  <td><span class="admin-badge admin-badge--success">Hoàn thành</span></td>
                   <td>
                     <div class="admin-actions">
-                      <a href="#sua-1" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #001?">Xóa</button>
+                      <a href="orders.html" class="admin-btn admin-btn--info admin-btn--sm">Chi tiết</a>
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td>#002</td>
-                  <td><strong>Cold-Pressed Cần Tây Táo Xanh 500ml</strong></td>
-                  <td>Cold-Pressed Juice</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--warning">Chờ duyệt</span></td>
+                  <td><strong>VS1002</strong></td>
+                  <td>Trần Minh</td>
+                  <td>21/11/2026</td>
+                  <td>159.000đ</td>
+                  <td><span class="admin-badge admin-badge--info">Đang giao</span></td>
                   <td>
                     <div class="admin-actions">
-                      <a href="#sua-2" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #002?">Xóa</button>
+                      <a href="orders.html" class="admin-btn admin-btn--info admin-btn--sm">Chi tiết</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>VS1003</strong></td>
+                  <td>Lê Anh</td>
+                  <td>22/11/2026</td>
+                  <td>109.000đ</td>
+                  <td><span class="admin-badge admin-badge--warning">Chờ xác nhận</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <a href="orders.html" class="admin-btn admin-btn--info admin-btn--sm">Chi tiết</a>
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
-          </div>
-
-          <!-- Thanh phân trang chuẩn (Pagination) -->
-          <div class="admin-pagination-bar">
-            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 42 bản ghi</p>
-            <nav aria-label="Phân trang dữ liệu">
-              <ul class="admin-pagination">
-                <li><a class="admin-pagination__link is-disabled" href="#">« Trước</a></li>
-                <li><a class="admin-pagination__link is-active" href="?page=1" aria-current="page">1</a></li>
-                <li><a class="admin-pagination__link" href="?page=2">2</a></li>
-                <li><a class="admin-pagination__link" href="?page=3">3</a></li>
-                <li><a class="admin-pagination__link" href="?page=2">Sau »</a></li>
-              </ul>
-            </nav>
           </div>
         </section>
       </main>
