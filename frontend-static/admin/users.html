@@ -1,10 +1,10 @@
-<!--giữ nguyên phần Sidebar + Topbar, chỉ thay đổi tiêu đề và ruột bên trong <main>-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản trị — Công ty TNHH Verde Sana</title>
+  <title>Quản lý người dùng — Quản trị Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +13,8 @@
   <!-- 2. Biến màu & tùy biến thương hiệu Verde Sana -->
   <link rel="stylesheet" href="../../public/assets/css/variables.css">
   <link rel="stylesheet" href="../../public/assets/css/admin-custom.css">
+  <!-- 3. CSS riêng [C6] Quản lý người dùng -->
+  <link rel="stylesheet" href="../../public/assets/css/admin-users.css">
 </head>
 <body class="admin-body">
   <div id="adminOverlay" class="admin-overlay" aria-hidden="true"></div>
@@ -22,7 +24,7 @@
     <aside id="adminSidebar" class="admin-sidebar" aria-label="Menu quản trị">
       <div class="admin-sidebar__brand">
         <a href="dashboard.html" class="admin-sidebar__logo">
-          <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
+          <img src="../../public/assets/images/brand/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
           <span>Verde Sana Admin</span>
         </a>
         <button id="adminSidebarClose" class="admin-sidebar__close" type="button" aria-label="Đóng menu">×</button>
@@ -31,7 +33,7 @@
       <nav class="admin-nav">
         <p class="admin-nav__group">Tổng quan</p>
         <ul class="admin-nav__list">
-          <li><a class="admin-nav__link is-active" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
+          <li><a class="admin-nav__link" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
         </ul>
 
         <p class="admin-nav__group">Hệ thống & Liên hệ (TV1)</p>
@@ -42,7 +44,7 @@
 
         <p class="admin-nav__group">Người dùng & Nội dung (TV2)</p>
         <ul class="admin-nav__list">
-          <li><a class="admin-nav__link" href="users.html"><span>Quản lý người dùng</span><span class="admin-nav__tag">C6</span></a></li>
+          <li><a class="admin-nav__link is-active" href="users.html" aria-current="page"><span>Quản lý người dùng</span><span class="admin-nav__tag">C6</span></a></li>
           <li><a class="admin-nav__link" href="about.html"><span>Trang Giới thiệu</span><span class="admin-nav__tag">R2</span></a></li>
           <li><a class="admin-nav__link" href="faqs.html"><span>Câu hỏi Hỏi/đáp (FAQ)</span><span class="admin-nav__tag">R2</span></a></li>
         </ul>
@@ -67,7 +69,7 @@
       <header class="admin-topbar">
         <div class="admin-topbar__left">
           <button id="adminMenuToggle" class="admin-menu-toggle" type="button" aria-label="Mở menu quản trị" aria-expanded="false">☰</button>
-          <p class="admin-breadcrumb">Quản trị / <strong>Tên phân hệ hiện tại</strong></p>
+          <p class="admin-breadcrumb">Quản trị / <strong>Quản lý người dùng</strong></p>
         </div>
 
         <div class="admin-topbar__right">
@@ -85,64 +87,265 @@
         </div>
       </header>
 
-      <!-- NỘI DUNG TỪNG TRANG ADMIN (BẢNG MẪU CÓ PHÂN TRANG) -->
+      <!-- NỘI DUNG: QUẢN LÝ NGƯỜI DÙNG (NGUOIDUNG ⟶ THANHVIEN / QUANTRIVIEN) -->
       <main class="admin-content">
         <div class="admin-page-head">
-          <h1 class="admin-page-title">Danh sách quản lý mẫu</h1>
-          <a href="#them-moi" class="admin-btn admin-btn--primary">+ Thêm mới</a>
+          <h1 class="admin-page-title">Quản lý người dùng</h1>
         </div>
 
-        <section class="admin-card" aria-label="Bảng dữ liệu quản trị">
+        <!-- Thống kê nhanh -->
+        <ul class="user-stats" aria-label="Thống kê tài khoản">
+          <li class="user-stat"><span class="user-stat__label">Tổng tài khoản</span><span class="user-stat__value">48</span></li>
+          <li class="user-stat"><span class="user-stat__label">Thành viên</span><span class="user-stat__value">45</span></li>
+          <li class="user-stat"><span class="user-stat__label">Quản trị viên</span><span class="user-stat__value">3</span></li>
+          <li class="user-stat"><span class="user-stat__label">Đang bị khóa</span><span class="user-stat__value user-stat__value--danger" id="lockedCount">4</span></li>
+        </ul>
+
+        <section class="admin-card" aria-labelledby="userTableTitle">
+          <div class="admin-card-head">
+            <h2 id="userTableTitle" class="admin-card-head__title">Danh sách tài khoản</h2>
+          </div>
+
           <!-- Thanh tìm kiếm & lọc -->
           <div class="admin-toolbar">
             <form class="admin-filter-form" action="#" method="get" data-validate="true">
-              <input class="admin-input" type="search" name="keyword" placeholder="Tìm kiếm theo từ khóa..." aria-label="Tìm kiếm theo từ khóa">
-              <select class="admin-select" name="status" aria-label="Lọc theo trạng thái">
+              <input class="admin-input" type="search" name="keyword" placeholder="Tìm theo họ tên, email, SĐT..." aria-label="Tìm theo họ tên, email hoặc số điện thoại">
+              <select class="admin-select" name="vai_tro" aria-label="Lọc theo vai trò">
+                <option value="">Tất cả vai trò</option>
+                <option value="member">Thành viên</option>
+                <option value="admin">Quản trị viên</option>
+              </select>
+              <select class="admin-select" name="trang_thai" aria-label="Lọc theo trạng thái tài khoản">
                 <option value="">Tất cả trạng thái</option>
                 <option value="active">Đang hoạt động</option>
-                <option value="hidden">Tạm ẩn</option>
+                <option value="locked">Đã khóa</option>
               </select>
               <button class="admin-btn admin-btn--primary" type="submit">Tìm kiếm</button>
             </form>
           </div>
 
-          <!-- Bảng dữ liệu mẫu -->
+          <!-- Bảng dữ liệu -->
           <div class="admin-table-wrap">
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Tên mục / Tiêu đề</th>
-                  <th>Phân loại</th>
-                  <th>Ngày cập nhật</th>
-                  <th>Trạng thái</th>
-                  <th>Thao tác</th>
+                  <th scope="col">Mã</th>
+                  <th scope="col">Người dùng</th>
+                  <th scope="col">Số điện thoại</th>
+                  <th scope="col">Vai trò</th>
+                  <th scope="col">Ngày tạo</th>
+                  <th scope="col">Trạng thái</th>
+                  <th scope="col">Thao tác</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>#001</td>
-                  <td><strong>Salad Cá Hồi Sốt Mè Rang</strong></td>
-                  <td>Salad</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+              <tbody id="userTableBody">
+                <tr data-id="ND001" data-name="Nguyễn Minh Quân" data-email="admin@verdesana.vn" data-phone="0901234567" data-role="admin" data-status="active" data-created="01/10/2026" data-orders="0" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="268 Lý Thường Kiệt" data-ward="Phường Diên Hồng" data-city="TP. Hồ Chí Minh" data-self="1">
+                  <td>ND001</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">MQ</span>
+                      <div><span class="user-name"><span class="user-name-text">Nguyễn Minh Quân</span><span class="user-you">Bạn</span></span><span class="user-email">admin@verdesana.vn</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0901234567</td>
+                  <td><span class="user-role user-role--admin">Quản trị viên</span></td>
+                  <td>01/10/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
                   <td>
                     <div class="admin-actions">
-                      <a href="#sua-1" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #001?">Xóa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock disabled title="Không thể tự khóa tài khoản đang đăng nhập">Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND001 – Nguyễn Minh Quân? Thao tác này không thể hoàn tác." disabled title="Không thể tự xóa tài khoản đang đăng nhập">Xóa</button>
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td>#002</td>
-                  <td><strong>Cold-Pressed Cần Tây Táo Xanh 500ml</strong></td>
-                  <td>Cold-Pressed Juice</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--warning">Chờ duyệt</span></td>
+                <tr data-id="ND002" data-name="Trần Thu Trang" data-email="noidung@verdesana.vn" data-phone="0912345678" data-role="admin" data-status="active" data-created="05/10/2026" data-orders="0" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="" data-ward="" data-city="" data-self="0">
+                  <td>ND002</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">TT</span>
+                      <div><span class="user-name"><span class="user-name-text">Trần Thu Trang</span></span><span class="user-email">noidung@verdesana.vn</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0912345678</td>
+                  <td><span class="user-role user-role--admin">Quản trị viên</span></td>
+                  <td>05/10/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
                   <td>
                     <div class="admin-actions">
-                      <a href="#sua-2" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #002?">Xóa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND002 – Trần Thu Trang? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="ND003" data-name="Lê Hoàng Phúc" data-email="phuc.le@gmail.com" data-phone="0987654321" data-role="member" data-status="active" data-created="12/10/2026" data-orders="14" data-avatar="../../public/assets/images/avatars/avatar-member-02.jpg" data-street="45 Nguyễn Tri Phương" data-ward="Phường Vườn Lài" data-city="TP. Hồ Chí Minh" data-self="0">
+                  <td>ND003</td>
+                  <td>
+                    <div class="user-cell">
+                      <img class="user-avatar" src="../../public/assets/images/avatars/avatar-member-02.jpg" alt="Ảnh đại diện Lê Hoàng Phúc" width="40" height="40" loading="lazy">
+                      <div><span class="user-name"><span class="user-name-text">Lê Hoàng Phúc</span></span><span class="user-email">phuc.le@gmail.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0987654321</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>12/10/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND003 – Lê Hoàng Phúc? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="ND004" data-name="Phạm Ngọc Ánh" data-email="anh.pham@gmail.com" data-phone="0932111222" data-role="member" data-status="active" data-created="15/10/2026" data-orders="9" data-avatar="../../public/assets/images/avatars/avatar-member-01.jpg" data-street="12 Sư Vạn Hạnh" data-ward="Phường Hòa Hưng" data-city="TP. Hồ Chí Minh" data-self="0">
+                  <td>ND004</td>
+                  <td>
+                    <div class="user-cell">
+                      <img class="user-avatar" src="../../public/assets/images/avatars/avatar-member-01.jpg" alt="Ảnh đại diện Phạm Ngọc Ánh" width="40" height="40" loading="lazy">
+                      <div><span class="user-name"><span class="user-name-text">Phạm Ngọc Ánh</span></span><span class="user-email">anh.pham@gmail.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0932111222</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>15/10/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND004 – Phạm Ngọc Ánh? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="is-locked" data-id="ND005" data-name="Võ Thành Đạt" data-email="dat.vo@yahoo.com" data-phone="0978123456" data-role="member" data-status="locked" data-created="18/10/2026" data-orders="3" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="88 Cách Mạng Tháng Tám" data-ward="Phường Bàn Cờ" data-city="TP. Hồ Chí Minh" data-self="0">
+                  <td>ND005</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">TĐ</span>
+                      <div><span class="user-name"><span class="user-name-text">Võ Thành Đạt</span></span><span class="user-email">dat.vo@yahoo.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0978123456</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>18/10/2026</td>
+                  <td><span class="admin-badge admin-badge--danger">Đã khóa</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--success" data-user-lock>Mở khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND005 – Võ Thành Đạt? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="ND006" data-name="Đặng Mỹ Linh" data-email="linh.dang@gmail.com" data-phone="0909888777" data-role="member" data-status="active" data-created="22/10/2026" data-orders="21" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="7 Thành Thái" data-ward="Phường Diên Hồng" data-city="TP. Hồ Chí Minh" data-self="0">
+                  <td>ND006</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">ML</span>
+                      <div><span class="user-name"><span class="user-name-text">Đặng Mỹ Linh</span></span><span class="user-email">linh.dang@gmail.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0909888777</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>22/10/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND006 – Đặng Mỹ Linh? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="ND007" data-name="Bùi Quốc Huy" data-email="huy.bui@outlook.com" data-phone="0388456789" data-role="member" data-status="active" data-created="03/11/2026" data-orders="5" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="" data-ward="" data-city="" data-self="0">
+                  <td>ND007</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">QH</span>
+                      <div><span class="user-name"><span class="user-name-text">Bùi Quốc Huy</span></span><span class="user-email">huy.bui@outlook.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0388456789</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>03/11/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND007 – Bùi Quốc Huy? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="is-locked" data-id="ND008" data-name="Huỳnh Thảo My" data-email="my.huynh@gmail.com" data-phone="0356789012" data-role="member" data-status="locked" data-created="09/11/2026" data-orders="1" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="150 Ba Tháng Hai" data-ward="Phường Hòa Hưng" data-city="TP. Hồ Chí Minh" data-self="0">
+                  <td>ND008</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">TM</span>
+                      <div><span class="user-name"><span class="user-name-text">Huỳnh Thảo My</span></span><span class="user-email">my.huynh@gmail.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0356789012</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>09/11/2026</td>
+                  <td><span class="admin-badge admin-badge--danger">Đã khóa</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--success" data-user-lock>Mở khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND008 – Huỳnh Thảo My? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="ND009" data-name="Ngô Gia Bảo" data-email="bao.ngo@gmail.com" data-phone="0767123123" data-role="member" data-status="active" data-created="17/11/2026" data-orders="2" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="" data-ward="" data-city="" data-self="0">
+                  <td>ND009</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">GB</span>
+                      <div><span class="user-name"><span class="user-name-text">Ngô Gia Bảo</span></span><span class="user-email">bao.ngo@gmail.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0767123123</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>17/11/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND009 – Ngô Gia Bảo? Thao tác này không thể hoàn tác.">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="ND010" data-name="Đỗ Khánh Ngọc" data-email="ngoc.do@gmail.com" data-phone="0822999888" data-role="member" data-status="active" data-created="25/11/2026" data-orders="0" data-avatar="../../public/assets/images/avatars/avatar-default.png" data-street="" data-ward="" data-city="" data-self="0">
+                  <td>ND010</td>
+                  <td>
+                    <div class="user-cell">
+                      <span class="user-avatar user-avatar--initials" aria-hidden="true">KN</span>
+                      <div><span class="user-name"><span class="user-name-text">Đỗ Khánh Ngọc</span></span><span class="user-email">ngoc.do@gmail.com</span></div>
+                    </div>
+                  </td>
+                  <td class="user-phone">0822999888</td>
+                  <td><span class="user-role user-role--member">Thành viên</span></td>
+                  <td>25/11/2026</td>
+                  <td><span class="admin-badge admin-badge--success">Hoạt động</span></td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-edit>Xem/Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-user-reset>Đặt lại MK</button>
+                      <button type="button" class="admin-btn admin-btn--sm admin-btn--warning" data-user-lock>Khóa</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-user-delete data-confirm="Xóa vĩnh viễn tài khoản ND010 – Đỗ Khánh Ngọc? Thao tác này không thể hoàn tác.">Xóa</button>
                     </div>
                   </td>
                 </tr>
@@ -152,13 +355,15 @@
 
           <!-- Thanh phân trang chuẩn (Pagination) -->
           <div class="admin-pagination-bar">
-            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 42 bản ghi</p>
-            <nav aria-label="Phân trang dữ liệu">
+            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 48 tài khoản</p>
+            <nav aria-label="Phân trang tài khoản">
               <ul class="admin-pagination">
                 <li><a class="admin-pagination__link is-disabled" href="#">« Trước</a></li>
                 <li><a class="admin-pagination__link is-active" href="?page=1" aria-current="page">1</a></li>
                 <li><a class="admin-pagination__link" href="?page=2">2</a></li>
                 <li><a class="admin-pagination__link" href="?page=3">3</a></li>
+                <li><a class="admin-pagination__link" href="?page=4">4</a></li>
+                <li><a class="admin-pagination__link" href="?page=5">5</a></li>
                 <li><a class="admin-pagination__link" href="?page=2">Sau »</a></li>
               </ul>
             </nav>
@@ -168,7 +373,361 @@
     </div>
   </div>
 
+  <!-- ==================== HỘP THOẠI 1: XEM / SỬA THÔNG TIN ==================== -->
+  <dialog id="editUserModal" class="user-modal" aria-labelledby="editUserTitle">
+    <form id="editUserForm" action="#" method="post" data-validate="true">
+      <div class="user-modal__head">
+        <h2 id="editUserTitle" class="user-modal__title">Thông tin tài khoản</h2>
+        <button type="button" class="user-modal__close" data-close aria-label="Đóng">×</button>
+      </div>
+      <div class="user-modal__body">
+        <input type="hidden" name="csrf_token" value="">
+        <input type="hidden" name="ma_nd" value="">
+
+        <div class="user-modal__profile">
+          <img id="editAvatar" class="user-avatar" src="../../public/assets/images/avatars/avatar-default.png" alt="Ảnh đại diện người dùng" width="56" height="56">
+          <dl class="user-modal__meta">
+            <dt>Mã tài khoản</dt><dd id="editMetaId">—</dd>
+            <dt>Ngày tạo</dt><dd id="editMetaCreated">—</dd>
+            <dt>Số đơn đã đặt</dt><dd id="editMetaOrders">—</dd>
+          </dl>
+        </div>
+
+        <div class="user-form-grid">
+          <div class="user-field is-full">
+            <label class="user-label" for="editName">Họ và tên <span class="req">*</span></label>
+            <input class="admin-input" id="editName" name="ho_ten" type="text" required minlength="2" maxlength="100" data-msg-required="Vui lòng nhập họ và tên.">
+          </div>
+          <div class="user-field">
+            <label class="user-label" for="editEmail">Email <span class="req">*</span></label>
+            <input class="admin-input" id="editEmail" name="email" type="email" required maxlength="150" data-msg-required="Vui lòng nhập email.">
+          </div>
+          <div class="user-field">
+            <label class="user-label" for="editPhone">Số điện thoại <span class="req">*</span></label>
+            <input class="admin-input" id="editPhone" name="so_dien_thoai" type="tel" required data-rule="phone" data-msg-required="Vui lòng nhập số điện thoại.">
+          </div>
+          <div class="user-field">
+            <label class="user-label" for="editRole">Vai trò</label>
+            <select class="admin-select" id="editRole" name="vai_tro">
+              <option value="member">Thành viên</option>
+              <option value="admin">Quản trị viên</option>
+            </select>
+          </div>
+          <div class="user-field">
+            <label class="user-label" for="editStatus">Trạng thái</label>
+            <select class="admin-select" id="editStatus" name="trang_thai">
+              <option value="active">Đang hoạt động</option>
+              <option value="locked">Đã khóa</option>
+            </select>
+          </div>
+
+          <fieldset class="user-fieldset">
+            <legend>Địa chỉ giao hàng mặc định</legend>
+            <div class="user-field">
+              <label class="user-label" for="editStreet">Số nhà, tên đường</label>
+              <input class="admin-input" id="editStreet" name="dia_chi_duong" type="text" maxlength="150">
+            </div>
+            <div class="user-field">
+              <label class="user-label" for="editWard">Phường/Xã</label>
+              <input class="admin-input" id="editWard" name="phuong_xa" type="text" maxlength="100">
+            </div>
+            <div class="user-field">
+              <label class="user-label" for="editCity">Tỉnh/Thành phố</label>
+              <input class="admin-input" id="editCity" name="tinh_thanh" type="text" maxlength="100">
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="user-modal__foot">
+        <button type="button" class="admin-btn admin-btn--info" data-close>Đóng</button>
+        <button type="submit" class="admin-btn admin-btn--primary">Lưu thay đổi</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ==================== HỘP THOẠI 2: ĐẶT LẠI MẬT KHẨU ==================== -->
+  <dialog id="resetPassModal" class="user-modal user-modal--sm" aria-labelledby="resetPassTitle">
+    <form id="resetPassForm" action="#" method="post" data-validate="true">
+      <div class="user-modal__head">
+        <h2 id="resetPassTitle" class="user-modal__title">Đặt lại mật khẩu</h2>
+        <button type="button" class="user-modal__close" data-close aria-label="Đóng">×</button>
+      </div>
+      <div class="user-modal__body">
+        <input type="hidden" name="csrf_token" value="">
+        <input type="hidden" name="ma_nd" value="">
+        <p class="user-modal__note">Đặt mật khẩu tạm thời cho <strong id="resetUserName">người dùng</strong>. Hãy gửi mật khẩu này cho người dùng qua kênh an toàn.</p>
+        <div class="user-form-grid">
+          <div class="user-field is-full">
+            <label class="user-label" for="newPass">Mật khẩu mới <span class="req">*</span></label>
+            <div class="user-pass-row">
+              <input class="admin-input" id="newPass" name="mat_khau_moi" type="password" required minlength="8" maxlength="64" autocomplete="new-password" data-msg-required="Vui lòng nhập mật khẩu mới.">
+              <button type="button" class="admin-btn admin-btn--info" id="genPassBtn">Tạo ngẫu nhiên</button>
+              <button type="button" class="admin-btn admin-btn--info" id="showPassBtn" aria-pressed="false">Hiện</button>
+            </div>
+            <p class="user-hint">Tối thiểu 8 ký tự, nên có chữ hoa, chữ thường và số.</p>
+          </div>
+          <div class="user-field is-full">
+            <label class="user-label" for="confirmPass">Nhập lại mật khẩu mới <span class="req">*</span></label>
+            <input class="admin-input" id="confirmPass" name="xac_nhan_mat_khau" type="password" required data-match="#newPass" autocomplete="new-password" data-msg-required="Vui lòng nhập lại mật khẩu mới.">
+          </div>
+          <div class="user-field is-full">
+            <label class="user-check" for="forceChange">
+              <input id="forceChange" name="bat_buoc_doi" type="checkbox" value="1" checked>
+              Yêu cầu đổi mật khẩu ở lần đăng nhập tiếp theo
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="user-modal__foot">
+        <button type="button" class="admin-btn admin-btn--info" data-close>Hủy</button>
+        <button type="submit" class="admin-btn admin-btn--warning">Đặt lại mật khẩu</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ==================== HỘP THOẠI 3: KHÓA TÀI KHOẢN ==================== -->
+  <dialog id="lockUserModal" class="user-modal user-modal--sm" aria-labelledby="lockUserTitle">
+    <form id="lockUserForm" action="#" method="post" data-validate="true">
+      <div class="user-modal__head">
+        <h2 id="lockUserTitle" class="user-modal__title">Khóa tài khoản</h2>
+        <button type="button" class="user-modal__close" data-close aria-label="Đóng">×</button>
+      </div>
+      <div class="user-modal__body">
+        <input type="hidden" name="csrf_token" value="">
+        <input type="hidden" name="ma_nd" value="">
+        <p class="user-modal__note">Tài khoản <strong id="lockUserName">người dùng</strong> sẽ không thể đăng nhập, đặt hàng hay bình luận cho đến khi được mở khóa.</p>
+        <div class="user-form-grid">
+          <div class="user-field is-full">
+            <label class="user-label" for="lockReason">Lý do khóa <span class="req">*</span></label>
+            <select class="admin-select" id="lockReason" name="ly_do" required data-msg-required="Vui lòng chọn lý do khóa.">
+              <option value="">-- Chọn lý do --</option>
+              <option value="spam">Bình luận spam / ngôn từ không phù hợp</option>
+              <option value="boom">Đặt hàng ảo, bom hàng nhiều lần</option>
+              <option value="security">Nghi ngờ tài khoản bị xâm nhập</option>
+              <option value="request">Người dùng yêu cầu tạm khóa</option>
+              <option value="other">Lý do khác</option>
+            </select>
+          </div>
+          <div class="user-field is-full">
+            <label class="user-label" for="lockNote">Ghi chú</label>
+            <textarea class="admin-textarea" id="lockNote" name="ghi_chu" maxlength="500" rows="3" placeholder="Mô tả thêm (không bắt buộc)"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="user-modal__foot">
+        <button type="button" class="admin-btn admin-btn--info" data-close>Hủy</button>
+        <button type="submit" class="admin-btn admin-btn--danger">Khóa tài khoản</button>
+      </div>
+    </form>
+  </dialog>
+
+  <p id="userToast" class="user-toast" role="status" hidden></p>
+
   <script src="../../public/assets/js/admin.js"></script>
   <script src="../../public/assets/js/validator.js"></script>
+  <script>
+    // [C6] JS riêng của trang: mở hộp thoại theo dòng, khóa/mở khóa, tạo mật khẩu ngẫu nhiên.
+    // Giao diện tĩnh GĐ1: chỉ cập nhật trên màn hình; GĐ2 các form sẽ POST lên UserAdminController.
+    (function () {
+      'use strict';
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const editModal = document.getElementById('editUserModal');
+        const resetModal = document.getElementById('resetPassModal');
+        const lockModal = document.getElementById('lockUserModal');
+        const toast = document.getElementById('userToast');
+        let currentRow = null;
+        let toastTimer = null;
+
+        function showToast(message) {
+          toast.textContent = message;
+          toast.hidden = false;
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toast.hidden = true; }, 3000);
+        }
+
+        function clearErrors(form) {
+          form.querySelectorAll('.is-invalid').forEach(function (el) { el.classList.remove('is-invalid'); });
+          form.querySelectorAll('.form-error').forEach(function (el) { el.remove(); });
+        }
+
+        function openModal(modal, row) {
+          currentRow = row;
+          const form = modal.querySelector('form');
+          form.reset();
+          clearErrors(form);
+          form.querySelector('[name="ma_nd"]').value = row.dataset.id;
+          if (typeof modal.showModal === 'function') modal.showModal(); else modal.setAttribute('open', '');
+        }
+
+        function closeModal(modal) {
+          if (typeof modal.close === 'function') modal.close(); else modal.removeAttribute('open');
+        }
+
+        // Thẻ "Đang bị khóa" = số tài khoản bị khóa ở các trang khác (cố định) + số dòng bị khóa trên trang này
+        const lockedOtherPages = 4 - document.querySelectorAll('#userTableBody tr[data-status="locked"]').length;
+        function updateLockedCount() {
+          const now = lockedOtherPages + document.querySelectorAll('#userTableBody tr[data-status="locked"]').length;
+          document.getElementById('lockedCount').textContent = String(now);
+        }
+
+        function setRowStatus(row, status) {
+          row.dataset.status = status;
+          row.classList.toggle('is-locked', status === 'locked');
+          const badge = row.querySelector('.admin-badge');
+          badge.className = 'admin-badge ' + (status === 'locked' ? 'admin-badge--danger' : 'admin-badge--success');
+          badge.textContent = status === 'locked' ? 'Đã khóa' : 'Hoạt động';
+          const lockBtn = row.querySelector('[data-user-lock]');
+          if (lockBtn && !lockBtn.disabled) {
+            lockBtn.textContent = status === 'locked' ? 'Mở khóa' : 'Khóa';
+            lockBtn.className = 'admin-btn admin-btn--sm ' + (status === 'locked' ? 'admin-btn--success' : 'admin-btn--warning');
+          }
+          updateLockedCount();
+        }
+
+        // Đóng hộp thoại: nút có data-close hoặc bấm ra ngoài vùng hộp thoại
+        document.querySelectorAll('.user-modal').forEach(function (modal) {
+          modal.querySelectorAll('[data-close]').forEach(function (btn) {
+            btn.addEventListener('click', function () { closeModal(modal); });
+          });
+          modal.addEventListener('click', function (event) {
+            if (event.target === modal) closeModal(modal);
+          });
+        });
+
+        // 1. Xem / Sửa
+        document.querySelectorAll('[data-user-edit]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const row = btn.closest('tr');
+            openModal(editModal, row);
+            const d = row.dataset;
+            document.getElementById('editUserTitle').textContent = 'Thông tin tài khoản ' + d.id;
+            document.getElementById('editAvatar').src = d.avatar;
+            document.getElementById('editMetaId').textContent = d.id;
+            document.getElementById('editMetaCreated').textContent = d.created;
+            document.getElementById('editMetaOrders').textContent = d.orders;
+            document.getElementById('editName').value = d.name;
+            document.getElementById('editEmail').value = d.email;
+            document.getElementById('editPhone').value = d.phone;
+            document.getElementById('editRole').value = d.role;
+            document.getElementById('editStatus').value = d.status;
+            document.getElementById('editStreet').value = d.street || '';
+            document.getElementById('editWard').value = d.ward || '';
+            document.getElementById('editCity').value = d.city || '';
+            // Không cho tự hạ quyền / tự khóa tài khoản đang đăng nhập
+            const isSelf = d.self === '1';
+            document.getElementById('editRole').disabled = isSelf;
+            document.getElementById('editStatus').disabled = isSelf;
+          });
+        });
+
+        // 2. Đặt lại mật khẩu
+        document.querySelectorAll('[data-user-reset]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const row = btn.closest('tr');
+            openModal(resetModal, row);
+            // Mỗi lần mở: đưa ô mật khẩu về chế độ ẩn (lần trước có thể đã bấm "Hiện"/"Tạo ngẫu nhiên")
+            newPass.type = 'password';
+            confirmPass.type = 'password';
+            document.getElementById('showPassBtn').textContent = 'Hiện';
+            document.getElementById('showPassBtn').setAttribute('aria-pressed', 'false');
+            document.getElementById('resetUserName').textContent = row.dataset.name + ' (' + row.dataset.email + ')';
+          });
+        });
+
+        // 3. Khóa / Mở khóa
+        document.querySelectorAll('[data-user-lock]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const row = btn.closest('tr');
+            if (row.dataset.status === 'locked') {
+              if (window.confirm('Mở khóa tài khoản ' + row.dataset.name + '?')) {
+                setRowStatus(row, 'active');
+                showToast('Đã mở khóa tài khoản ' + row.dataset.id + '.');
+              }
+              return;
+            }
+            openModal(lockModal, row);
+            document.getElementById('lockUserName').textContent = row.dataset.name + ' (' + row.dataset.id + ')';
+          });
+        });
+
+        // 4. Xóa (admin.js đã hỏi xác nhận qua data-confirm)
+        document.querySelectorAll('[data-user-delete]').forEach(function (btn) {
+          btn.addEventListener('click', function (event) {
+            if (event.defaultPrevented) return;
+            const row = btn.closest('tr');
+            showToast('Đã xóa tài khoản ' + row.dataset.id + '.');
+            row.remove();
+          });
+        });
+
+        // Tạo mật khẩu ngẫu nhiên & hiện/ẩn mật khẩu
+        const newPass = document.getElementById('newPass');
+        const confirmPass = document.getElementById('confirmPass');
+        document.getElementById('genPassBtn').addEventListener('click', function () {
+          const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
+          const bytes = new Uint32Array(10);
+          window.crypto.getRandomValues(bytes);
+          let pass = 'Vs';
+          bytes.forEach(function (n) { pass += chars[n % chars.length]; });
+          pass += '9';
+          newPass.value = pass;
+          confirmPass.value = pass;
+          clearErrors(resetModal.querySelector('form'));
+          newPass.type = 'text';
+          confirmPass.type = 'text';
+          document.getElementById('showPassBtn').textContent = 'Ẩn';
+          document.getElementById('showPassBtn').setAttribute('aria-pressed', 'true');
+        });
+        document.getElementById('showPassBtn').addEventListener('click', function () {
+          const show = newPass.type === 'password';
+          newPass.type = show ? 'text' : 'password';
+          confirmPass.type = show ? 'text' : 'password';
+          this.textContent = show ? 'Ẩn' : 'Hiện';
+          this.setAttribute('aria-pressed', String(show));
+        });
+
+        // Gửi form (sau khi validator.js đã kiểm tra hợp lệ)
+        document.getElementById('editUserForm').addEventListener('submit', function (event) {
+          if (event.defaultPrevented || !currentRow) return;
+          event.preventDefault();
+          const d = currentRow.dataset;
+          d.name = document.getElementById('editName').value.trim();
+          d.email = document.getElementById('editEmail').value.trim();
+          d.phone = document.getElementById('editPhone').value.trim();
+          d.street = document.getElementById('editStreet').value.trim();
+          d.ward = document.getElementById('editWard').value.trim();
+          d.city = document.getElementById('editCity').value.trim();
+          currentRow.querySelector('.user-name-text').textContent = d.name;
+          currentRow.querySelector('.user-email').textContent = d.email;
+          currentRow.querySelector('.user-phone').textContent = d.phone;
+          if (d.self !== '1') {
+            d.role = document.getElementById('editRole').value;
+            const role = currentRow.querySelector('.user-role');
+            role.className = 'user-role ' + (d.role === 'admin' ? 'user-role--admin' : 'user-role--member');
+            role.textContent = d.role === 'admin' ? 'Quản trị viên' : 'Thành viên';
+            setRowStatus(currentRow, document.getElementById('editStatus').value);
+          }
+          closeModal(editModal);
+          showToast('Đã cập nhật thông tin ' + d.id + '.');
+        });
+
+        document.getElementById('resetPassForm').addEventListener('submit', function (event) {
+          if (event.defaultPrevented || !currentRow) return;
+          event.preventDefault();
+          closeModal(resetModal);
+          showToast('Đã đặt lại mật khẩu cho ' + currentRow.dataset.id + '.');
+        });
+
+        document.getElementById('lockUserForm').addEventListener('submit', function (event) {
+          if (event.defaultPrevented || !currentRow) return;
+          event.preventDefault();
+          setRowStatus(currentRow, 'locked');
+          closeModal(lockModal);
+          showToast('Đã khóa tài khoản ' + currentRow.dataset.id + '.');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

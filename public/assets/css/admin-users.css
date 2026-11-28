@@ -1,0 +1,408 @@
+/* admin-users.css — [C6] TV2: Trang Admin Quản lý người dùng (users.html) */
+
+/* ---------- Thẻ thống kê nhanh ---------- */
+.user-stats {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.user-stat {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-admin);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-stat__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.user-stat__value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-heading);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.user-stat__value--danger {
+  color: var(--color-error);
+}
+
+/* ---------- Ô người dùng trong bảng ---------- */
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-admin);
+}
+
+.user-avatar--initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-name {
+  display: block;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.user-email {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.user-you {
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.user-role {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.user-role--admin {
+  background-color: var(--admin-sidebar);
+  color: var(--bg-white);
+}
+
+.user-role--member {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.admin-table .admin-badge {
+  white-space: nowrap;
+}
+
+.admin-table tr.is-locked td {
+  background-color: #FFF7F7;
+}
+
+.admin-table tr.is-locked .user-name {
+  color: var(--text-muted);
+}
+
+.admin-btn--success {
+  background-color: #DCFCE7;
+  color: var(--color-success);
+}
+
+.admin-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- Hộp thoại (dialog) Xem/Sửa, Reset mật khẩu, Khóa ---------- */
+.user-modal {
+  width: min(640px, calc(100% - 32px));
+  max-height: calc(100vh - 48px);
+  margin: auto; /* Tailadmin reset xóa margin mặc định của <dialog> -> căn giữa lại */
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+  color: var(--text-body);
+  overflow: auto;
+}
+
+.user-modal--sm {
+  width: min(460px, calc(100% - 32px));
+}
+
+.user-modal::backdrop {
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+.user-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-admin);
+}
+
+.user-modal__title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.user-modal__close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-admin);
+  border-radius: 8px;
+  background-color: var(--bg-white);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.user-modal__close:hover {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.user-modal__body {
+  padding: 20px;
+}
+
+.user-modal__profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  background-color: var(--bg-admin);
+}
+
+.user-modal__profile .user-avatar {
+  width: 56px;
+  height: 56px;
+}
+
+.user-modal__meta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  font-size: 13px;
+}
+
+.user-modal__meta dt {
+  color: var(--text-muted);
+}
+
+.user-modal__meta dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.user-modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border-admin);
+  background-color: var(--bg-admin);
+}
+
+.user-modal__note {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+/* ---------- Form trong hộp thoại ---------- */
+.user-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.user-form-grid .is-full {
+  grid-column: 1 / -1;
+}
+
+.user-fieldset {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--border-admin);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.user-fieldset legend {
+  padding: 0 6px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.user-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.user-field .admin-input,
+.user-field .admin-select,
+.user-field .admin-textarea {
+  width: 100%;
+}
+
+.user-label {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.user-label .req {
+  color: var(--color-error);
+}
+
+.user-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.admin-textarea {
+  min-height: 90px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-admin);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-body);
+  resize: vertical;
+}
+
+.admin-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.user-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.user-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+.user-pass-row {
+  display: flex;
+  gap: 8px;
+}
+
+.user-pass-row .admin-input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Trạng thái lỗi của validator.js trong khung Admin */
+.admin-input.is-invalid,
+.admin-select.is-invalid,
+.admin-textarea.is-invalid {
+  border-color: var(--color-error);
+  background-color: #FEF2F2;
+}
+
+.admin-body .form-error {
+  display: block;
+  font-size: 12px;
+  color: var(--color-error);
+}
+
+/* ---------- Thông báo nhanh (toast) ---------- */
+.user-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  max-width: 360px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background-color: var(--color-success);
+  color: var(--bg-white);
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+}
+
+.user-toast[hidden] {
+  display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .user-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .user-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .user-stat__value {
+    font-size: 22px;
+  }
+
+  .user-form-grid,
+  .user-fieldset {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-filter-form,
+  .admin-filter-form .admin-input,
+  .admin-filter-form .admin-select,
+  .admin-filter-form .admin-btn {
+    width: 100%;
+  }
+
+  .user-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Cột Thao tác: xếp nút 2×2 để bảng vừa màn hình 1366px */
+.admin-table .admin-actions {
+  flex-wrap: wrap;
+  max-width: 190px;
+  white-space: normal;
+}
