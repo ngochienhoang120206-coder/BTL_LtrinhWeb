@@ -1,0 +1,1268 @@
+/* about-faq.css — [R2] TV2: Trang Giới thiệu, Trang Hỏi/đáp (Client) & 2 trang Admin tương ứng */
+
+/* ==========================================================================
+   1. KHỐI DÙNG CHUNG PHÍA CLIENT (Hero trang con, tiêu đề mục, hiệu ứng xuất hiện)
+   ========================================================================== */
+.page-hero {
+  position: relative;
+  color: var(--bg-white);
+  background-color: var(--text-heading);
+  background-image: linear-gradient(rgba(24, 58, 34, 0.55), rgba(24, 58, 34, 0.55)), url("../images/about/about-01-nong-trai.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 88px 0 72px;
+}
+
+.page-hero--compact {
+  padding: 64px 0 52px;
+  background-image: linear-gradient(rgba(24, 58, 34, 0.62), rgba(24, 58, 34, 0.62)), url("../images/about/about-02-nguyen-lieu.jpg");
+}
+
+.breadcrumb {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  margin-right: 6px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.breadcrumb a {
+  color: var(--bg-white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page-hero__title {
+  color: var(--bg-white);
+  font-size: clamp(30px, 4.6vw, 48px);
+  margin-bottom: 12px;
+}
+
+.page-hero__lead {
+  max-width: 640px;
+  margin: 0;
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.section {
+  padding: 72px 0;
+}
+
+.section--soft {
+  background-color: var(--bg-client-soft);
+}
+
+.section-head {
+  max-width: 680px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(26px, 3.4vw, 36px);
+  margin-bottom: 12px;
+}
+
+.section-desc {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Hiệu ứng xuất hiện khi cuộn (faq.js gắn class is-visible) */
+.js-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   2. TRANG GIỚI THIỆU (about.html)
+   ========================================================================== */
+.story {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.story__text p {
+  margin: 0 0 16px;
+}
+
+.story__quote {
+  margin: 24px 0 0;
+  padding: 18px 22px;
+  border-left: 4px solid var(--color-accent);
+  background-color: var(--color-accent-soft);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: var(--text-heading);
+}
+
+.story__quote footer {
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.story__media {
+  position: relative;
+}
+
+.story__media img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.story__badge {
+  position: absolute;
+  left: -20px;
+  bottom: 28px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  color: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.story__badge strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.stats__item {
+  padding: 24px;
+  text-align: center;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-client);
+  border-radius: var(--radius-md);
+}
+
+.stats__value {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.stats__label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.process {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  counter-reset: step;
+}
+
+.process__step {
+  position: relative;
+  padding: 28px 22px 24px;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-client);
+  border-radius: var(--radius-md);
+  counter-increment: step;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.process__step:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.process__step::before {
+  content: "0" counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.process__title {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.process__text {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.coldpress {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.coldpress__media img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.compare {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 15px;
+  background-color: var(--bg-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.compare caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-heading);
+}
+
+.compare th,
+.compare td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-client);
+  text-align: left;
+}
+
+.compare thead th {
+  background-color: var(--color-primary-soft);
+  color: var(--text-heading);
+}
+
+.compare td:nth-child(2) {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.value-card {
+  padding: 28px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-client);
+  background-color: var(--bg-white);
+}
+
+.value-card--primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--bg-white);
+}
+
+.value-card--primary .value-card__title {
+  color: var(--bg-white);
+}
+
+.value-card__title {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.value-card p {
+  margin: 0;
+}
+
+.value-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.team {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.team__photo img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.team__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.expert {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  border: 1px solid var(--border-client);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-white);
+}
+
+.expert__avatar {
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.expert__name {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+.expert__role {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.expert__bio {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.gallery__item {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-client);
+}
+
+.gallery__item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery__item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery__item figcaption {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.cta-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 36px 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--text-heading);
+  color: var(--color-primary-soft);
+}
+
+.cta-band__title {
+  color: var(--bg-white);
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.cta-band p {
+  margin: 0;
+}
+
+.cta-band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cta-band .btn--outline {
+  border-color: var(--bg-white);
+  color: var(--bg-white);
+}
+
+.cta-band .btn--outline:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   3. TRANG HỎI/ĐÁP (faq.html) — Accordion
+   ========================================================================== */
+.faq-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.faq-side {
+  position: sticky;
+  top: 100px;
+}
+
+.faq-search {
+  margin-bottom: 20px;
+}
+
+.faq-search label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.faq-search input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--border-client);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.faq-search input:focus {
+  outline: 2px solid var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+.faq-side__title {
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.faq-cats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faq-cats__btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-cats__btn:hover {
+  background-color: var(--bg-client-soft);
+}
+
+.faq-cats__btn.is-active {
+  background-color: var(--color-primary-soft);
+  border-color: var(--border-client);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.faq-cats__count {
+  min-width: 26px;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-white);
+  font-size: 12px;
+  text-align: center;
+}
+
+.faq-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.faq-result {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.faq-group {
+  margin-bottom: 36px;
+}
+
+.faq-group[hidden] {
+  display: none;
+}
+
+.faq-group__title {
+  font-size: 22px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-group__title::before {
+  content: "";
+  width: 6px;
+  height: 22px;
+  border-radius: 3px;
+  background-color: var(--color-accent);
+}
+
+.faq-item {
+  border: 1px solid var(--border-client);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  background-color: var(--bg-white);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.faq-item[hidden] {
+  display: none;
+}
+
+.faq-item.is-open {
+  background-color: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+.faq-item__q {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+.faq-item__btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-heading);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-item__btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  border-radius: var(--radius-md);
+}
+
+.faq-item__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--bg-client-soft);
+  position: relative;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.faq-item__icon::before,
+.faq-item__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: translate(-50%, -50%);
+}
+
+.faq-item__icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  transition: opacity 0.3s ease;
+}
+
+.faq-item.is-open .faq-item__icon {
+  background-color: var(--bg-white);
+  transform: rotate(180deg);
+}
+
+.faq-item.is-open .faq-item__icon::after {
+  opacity: 0;
+}
+
+.faq-item__panel {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.faq-item__body {
+  padding: 0 20px 18px;
+  color: var(--text-body);
+}
+
+.faq-item__body p {
+  margin: 0 0 10px;
+}
+
+.faq-item__body p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item__body ul {
+  margin: 0 0 10px;
+  padding-left: 20px;
+}
+
+mark.faq-hit {
+  background-color: #FEF3C7;
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.faq-empty {
+  padding: 32px;
+  text-align: center;
+  border: 1px dashed var(--border-client);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+.faq-empty[hidden] {
+  display: none;
+}
+
+.faq-help {
+  margin-top: 16px;
+  padding: 28px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-client-soft);
+  border: 1px solid var(--border-client);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.faq-help__title {
+  font-size: 21px;
+  margin-bottom: 4px;
+}
+
+.faq-help p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   4. TRANG ADMIN GIỚI THIỆU & ADMIN FAQ (Tailadmin)
+   ========================================================================== */
+.admin-layout-2col {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.admin-card__body {
+  padding: 20px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.admin-form-grid .is-full {
+  grid-column: 1 / -1;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-label {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.admin-label .req {
+  color: var(--color-error);
+}
+
+.admin-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.admin-field .admin-input,
+.admin-field .admin-select {
+  width: 100%;
+}
+
+.admin-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-admin);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-body);
+  resize: vertical;
+}
+
+.admin-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.admin-input[readonly] {
+  background-color: var(--bg-admin);
+  color: var(--text-muted);
+}
+
+/* Trạng thái lỗi của validator.js trong khung Admin */
+.admin-input.is-invalid,
+.admin-select.is-invalid,
+.admin-textarea.is-invalid,
+.mini-editor.is-invalid {
+  border-color: var(--color-error);
+  background-color: #FEF2F2;
+}
+
+.admin-body .form-error {
+  display: block;
+  font-size: 12px;
+  color: var(--color-error);
+}
+
+.admin-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.admin-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+.admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-admin);
+  background-color: var(--bg-admin);
+}
+
+.admin-btn--ghost {
+  background-color: var(--bg-white);
+  border-color: var(--border-admin);
+  color: var(--text-body);
+}
+
+.admin-btn--ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.admin-meta-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 14px;
+  font-size: 13px;
+}
+
+.admin-meta-list dt {
+  color: var(--text-muted);
+}
+
+.admin-meta-list dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.admin-counter {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.admin-counter.is-over {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+/* --- Trình soạn thảo WYSIWYG gọn nhẹ (mini-editor.js) --- */
+.mini-editor {
+  border: 1px solid var(--border-admin);
+  border-radius: 8px;
+  background-color: var(--bg-white);
+  overflow: hidden;
+}
+
+.mini-editor:focus-within {
+  border-color: var(--color-primary);
+}
+
+.mini-editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-admin);
+  background-color: var(--bg-admin);
+}
+
+.mini-editor__btn {
+  min-width: 34px;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.mini-editor__btn:hover,
+.mini-editor__btn.is-active {
+  background-color: var(--bg-white);
+  border-color: var(--border-admin);
+  color: var(--color-primary);
+}
+
+.mini-editor__sep {
+  width: 1px;
+  margin: 4px 4px;
+  background-color: var(--border-admin);
+}
+
+.mini-editor__area {
+  min-height: 280px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding: 16px 18px;
+  font-size: 15px;
+  line-height: 1.7;
+  outline: none;
+}
+
+/* Tailadmin reset mất kiểu chữ/danh sách -> khai báo lại cho vùng soạn thảo */
+.mini-editor__area h2 { font-size: 20px; font-weight: 700; margin: 14px 0 8px; color: var(--text-heading); }
+.mini-editor__area h3 { font-size: 17px; font-weight: 700; margin: 12px 0 6px; color: var(--text-heading); }
+.mini-editor__area p { margin: 0 0 10px; }
+.mini-editor__area ul { list-style: disc; margin: 0 0 10px; padding-left: 24px; }
+.mini-editor__area ol { list-style: decimal; margin: 0 0 10px; padding-left: 24px; }
+.mini-editor__area a { color: var(--color-primary); text-decoration: underline; }
+.mini-editor__area strong, .mini-editor__area b { font-weight: 700; }
+.mini-editor__area em, .mini-editor__area i { font-style: italic; }
+.mini-editor__area blockquote {
+  margin: 10px 0;
+  padding: 8px 14px;
+  border-left: 4px solid var(--color-accent);
+  background-color: var(--color-accent-soft);
+}
+
+.mini-editor__area:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-muted);
+}
+
+.mini-editor__status {
+  padding: 6px 12px;
+  border-top: 1px solid var(--border-admin);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.mini-editor__source {
+  display: none;
+}
+
+/* --- Khung kéo-thả upload ảnh & xem trước (upload-preview.js) --- */
+.upload-drop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 26px 16px;
+  border: 2px dashed var(--border-client);
+  border-radius: 10px;
+  background-color: var(--bg-client-soft);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.upload-drop:hover,
+.upload-drop.is-dragover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.upload-drop__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.upload-drop__title {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.upload-drop__hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.upload-previews {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.upload-previews:empty {
+  display: none;
+}
+
+.upload-thumb {
+  position: relative;
+  border: 1px solid var(--border-admin);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-white);
+}
+
+.upload-thumb img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.upload-thumb__name {
+  display: block;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-thumb__remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(15, 23, 42, 0.7);
+  color: var(--bg-white);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.upload-thumb__badge {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  color: var(--bg-white);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* --- Bảng FAQ Admin --- */
+.admin-faq-q {
+  display: block;
+  max-width: 280px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.admin-table .admin-badge {
+  white-space: nowrap;
+}
+
+.admin-faq-a {
+  display: block;
+  margin-top: 2px;
+  max-width: 280px;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 150px;
+  line-height: 1.4;
+}
+
+.admin-table tr.is-editing {
+  background-color: #FFFBEB;
+}
+
+.admin-group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-group-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-admin);
+}
+
+.admin-group-list li:last-child {
+  border-bottom: 0;
+}
+
+.admin-group-list__name {
+  font-weight: 600;
+}
+
+.admin-group-list__meta {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.admin-inline-form {
+  display: grid;
+  grid-template-columns: 1fr 90px;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-admin);
+}
+
+.admin-inline-form .admin-btn {
+  grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .story,
+  .coldpress,
+  .team {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .stats,
+  .process,
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .values {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .faq-side {
+    position: static;
+  }
+
+  .faq-cats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .faq-cats__btn {
+    width: auto;
+    gap: 8px;
+    border-color: var(--border-client);
+  }
+
+  .admin-layout-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .story__badge {
+    left: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 52px 0;
+  }
+
+  .page-hero {
+    padding: 60px 0 48px;
+  }
+
+  .stats,
+  .process,
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-band {
+    padding: 28px 22px;
+  }
+
+  .compare {
+    font-size: 14px;
+  }
+}
+
+/* Thông báo khi form Admin hợp lệ ở giao diện tĩnh GĐ1 (faq.js) */
+.admin-demo-note {
+  grid-column: 1 / -1;
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #BBF7D0;
+  background-color: #DCFCE7;
+  color: var(--color-success);
+  font-weight: 600;
+}

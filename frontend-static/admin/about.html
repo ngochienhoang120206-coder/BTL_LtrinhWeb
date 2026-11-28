@@ -1,10 +1,10 @@
-<!--giữ nguyên phần Sidebar + Topbar, chỉ thay đổi tiêu đề và ruột bên trong <main>-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản trị — Công ty TNHH Verde Sana</title>
+  <title>Quản lý trang Giới thiệu — Quản trị Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +13,8 @@
   <!-- 2. Biến màu & tùy biến thương hiệu Verde Sana -->
   <link rel="stylesheet" href="../../public/assets/css/variables.css">
   <link rel="stylesheet" href="../../public/assets/css/admin-custom.css">
+  <!-- 3. CSS riêng [R2] (form, WYSIWYG, kéo-thả ảnh) -->
+  <link rel="stylesheet" href="../../public/assets/css/about-faq.css">
 </head>
 <body class="admin-body">
   <div id="adminOverlay" class="admin-overlay" aria-hidden="true"></div>
@@ -22,7 +24,7 @@
     <aside id="adminSidebar" class="admin-sidebar" aria-label="Menu quản trị">
       <div class="admin-sidebar__brand">
         <a href="dashboard.html" class="admin-sidebar__logo">
-          <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
+          <img src="../../public/assets/images/brand/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
           <span>Verde Sana Admin</span>
         </a>
         <button id="adminSidebarClose" class="admin-sidebar__close" type="button" aria-label="Đóng menu">×</button>
@@ -31,7 +33,7 @@
       <nav class="admin-nav">
         <p class="admin-nav__group">Tổng quan</p>
         <ul class="admin-nav__list">
-          <li><a class="admin-nav__link is-active" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
+          <li><a class="admin-nav__link" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
         </ul>
 
         <p class="admin-nav__group">Hệ thống & Liên hệ (TV1)</p>
@@ -43,7 +45,7 @@
         <p class="admin-nav__group">Người dùng & Nội dung (TV2)</p>
         <ul class="admin-nav__list">
           <li><a class="admin-nav__link" href="users.html"><span>Quản lý người dùng</span><span class="admin-nav__tag">C6</span></a></li>
-          <li><a class="admin-nav__link" href="about.html"><span>Trang Giới thiệu</span><span class="admin-nav__tag">R2</span></a></li>
+          <li><a class="admin-nav__link is-active" href="about.html" aria-current="page"><span>Trang Giới thiệu</span><span class="admin-nav__tag">R2</span></a></li>
           <li><a class="admin-nav__link" href="faqs.html"><span>Câu hỏi Hỏi/đáp (FAQ)</span><span class="admin-nav__tag">R2</span></a></li>
         </ul>
 
@@ -67,7 +69,7 @@
       <header class="admin-topbar">
         <div class="admin-topbar__left">
           <button id="adminMenuToggle" class="admin-menu-toggle" type="button" aria-label="Mở menu quản trị" aria-expanded="false">☰</button>
-          <p class="admin-breadcrumb">Quản trị / <strong>Tên phân hệ hiện tại</strong></p>
+          <p class="admin-breadcrumb">Quản trị / Nội dung / <strong>Trang Giới thiệu</strong></p>
         </div>
 
         <div class="admin-topbar__right">
@@ -85,90 +87,158 @@
         </div>
       </header>
 
-      <!-- NỘI DUNG TỪNG TRANG ADMIN (BẢNG MẪU CÓ PHÂN TRANG) -->
+      <!-- NỘI DUNG: CHỈNH SỬA TRANG GIỚI THIỆU (bảng TRANG_NOIDUNG, MaTrang = gioi-thieu) -->
       <main class="admin-content">
         <div class="admin-page-head">
-          <h1 class="admin-page-title">Danh sách quản lý mẫu</h1>
-          <a href="#them-moi" class="admin-btn admin-btn--primary">+ Thêm mới</a>
+          <h1 class="admin-page-title">Nội dung trang Giới thiệu</h1>
+          <a href="../client/about.html" class="admin-btn admin-btn--ghost">Xem trang Giới thiệu</a>
         </div>
 
-        <section class="admin-card" aria-label="Bảng dữ liệu quản trị">
-          <!-- Thanh tìm kiếm & lọc -->
-          <div class="admin-toolbar">
-            <form class="admin-filter-form" action="#" method="get" data-validate="true">
-              <input class="admin-input" type="search" name="keyword" placeholder="Tìm kiếm theo từ khóa..." aria-label="Tìm kiếm theo từ khóa">
-              <select class="admin-select" name="status" aria-label="Lọc theo trạng thái">
-                <option value="">Tất cả trạng thái</option>
-                <option value="active">Đang hoạt động</option>
-                <option value="hidden">Tạm ẩn</option>
-              </select>
-              <button class="admin-btn admin-btn--primary" type="submit">Tìm kiếm</button>
-            </form>
-          </div>
+        <form id="aboutForm" action="#" method="post" enctype="multipart/form-data" data-validate="true" data-static-demo="Nội dung hợp lệ. Ở Giai đoạn 2 trang Giới thiệu sẽ được lưu vào CSDL (bảng TRANG_NOIDUNG).">
+          <input type="hidden" name="csrf_token" value="">
+          <input type="hidden" name="ma_trang" value="gioi-thieu">
 
-          <!-- Bảng dữ liệu mẫu -->
-          <div class="admin-table-wrap">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Tên mục / Tiêu đề</th>
-                  <th>Phân loại</th>
-                  <th>Ngày cập nhật</th>
-                  <th>Trạng thái</th>
-                  <th>Thao tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#001</td>
-                  <td><strong>Salad Cá Hồi Sốt Mè Rang</strong></td>
-                  <td>Salad</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
-                  <td>
-                    <div class="admin-actions">
-                      <a href="#sua-1" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #001?">Xóa</button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#002</td>
-                  <td><strong>Cold-Pressed Cần Tây Táo Xanh 500ml</strong></td>
-                  <td>Cold-Pressed Juice</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--warning">Chờ duyệt</span></td>
-                  <td>
-                    <div class="admin-actions">
-                      <a href="#sua-2" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #002?">Xóa</button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div class="admin-layout-2col">
+            <!-- Cột trái: nội dung chính -->
+            <div>
+              <section class="admin-card" aria-labelledby="aboutMainTitle">
+                <div class="admin-card-head">
+                  <h2 id="aboutMainTitle" class="admin-card-head__title">Thông tin hiển thị</h2>
+                </div>
+                <div class="admin-card__body admin-form-grid">
+                  <div class="admin-field is-full">
+                    <label class="admin-label" for="tieuDe">Tiêu đề trang <span class="req">*</span></label>
+                    <input class="admin-input" id="tieuDe" name="tieu_de" type="text" required minlength="5" maxlength="150" value="Về Verde Sana" data-msg-required="Vui lòng nhập tiêu đề trang.">
+                  </div>
 
-          <!-- Thanh phân trang chuẩn (Pagination) -->
-          <div class="admin-pagination-bar">
-            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 42 bản ghi</p>
-            <nav aria-label="Phân trang dữ liệu">
-              <ul class="admin-pagination">
-                <li><a class="admin-pagination__link is-disabled" href="#">« Trước</a></li>
-                <li><a class="admin-pagination__link is-active" href="?page=1" aria-current="page">1</a></li>
-                <li><a class="admin-pagination__link" href="?page=2">2</a></li>
-                <li><a class="admin-pagination__link" href="?page=3">3</a></li>
-                <li><a class="admin-pagination__link" href="?page=2">Sau »</a></li>
-              </ul>
-            </nav>
+                  <div class="admin-field">
+                    <label class="admin-label" for="slug">Đường dẫn (slug)</label>
+                    <input class="admin-input" id="slug" name="slug" type="text" value="gioi-thieu" readonly>
+                    <p class="admin-hint">URL cố định: /gioi-thieu</p>
+                  </div>
+
+                  <div class="admin-field">
+                    <label class="admin-label" for="trangThai">Trạng thái</label>
+                    <select class="admin-select" id="trangThai" name="trang_thai">
+                      <option value="1" selected>Đang hiển thị</option>
+                      <option value="0">Tạm ẩn (bản nháp)</option>
+                    </select>
+                  </div>
+
+                  <div class="admin-field is-full">
+                    <label class="admin-label" for="tomTat">Đoạn giới thiệu ngắn (Hero) <span class="req">*</span></label>
+                    <textarea class="admin-textarea" id="tomTat" name="tom_tat" required minlength="30" maxlength="300" rows="3" data-counter="tomTatCount" data-msg-required="Vui lòng nhập đoạn giới thiệu ngắn.">Từ một căn bếp nhỏ ở Quận 10, Verde Sana lớn lên cùng một niềm tin giản dị: bữa ăn lành mạnh phải tươi, ngon và do chính bạn lựa chọn.</textarea>
+                    <p class="admin-counter" id="tomTatCount" aria-live="polite">0/300 ký tự</p>
+                  </div>
+
+                  <div class="admin-field is-full">
+                    <span class="admin-label" id="noiDungLabel">Nội dung chi tiết <span class="req">*</span></span>
+                    <div class="mini-editor" data-mini-editor="noiDung" data-label="Nội dung chi tiết trang Giới thiệu"></div>
+                    <textarea class="mini-editor__source" id="noiDung" name="noi_dung" required minlength="100" aria-labelledby="noiDungLabel" placeholder="Viết câu chuyện thương hiệu, quy trình, công nghệ ép lạnh..." data-msg-required="Nội dung chi tiết không được để trống.">&lt;h2&gt;Câu chuyện thương hiệu&lt;/h2&gt;
+&lt;p&gt;Verde Sana – trong tiếng Ý nghĩa là “xanh và khỏe”. Năm 2022, ba người bạn làm việc văn phòng mở quầy Salad đầu tiên với một ý tưởng khác biệt: &lt;strong&gt;khách hàng tự chọn từng thành phần&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Quy trình chọn rau thủy canh&lt;/h2&gt;
+&lt;ol&gt;&lt;li&gt;Canh tác thủy canh trong nhà màng tại Đà Lạt.&lt;/li&gt;&lt;li&gt;Thu hoạch lúc 4–6 giờ sáng.&lt;/li&gt;&lt;li&gt;Kiểm tra và sơ chế ba lần nước.&lt;/li&gt;&lt;li&gt;Bảo quản chuỗi lạnh 2–6°C.&lt;/li&gt;&lt;/ol&gt;
+&lt;h2&gt;Công nghệ ép lạnh Cold-Pressed&lt;/h2&gt;
+&lt;p&gt;Máy ép thủy lực ép bằng lực nén từ từ, không sinh nhiệt, giữ trọn vitamin và enzyme tự nhiên.&lt;/p&gt;
+&lt;blockquote&gt;Chúng tôi trao cho bạn quyền tự do sáng tạo bữa ăn của mình.&lt;/blockquote&gt;</textarea>
+                  </div>
+                </div>
+              </section>
+
+              <section class="admin-card" aria-labelledby="aboutImgTitle" style="margin-top: 20px;">
+                <div class="admin-card-head">
+                  <h2 id="aboutImgTitle" class="admin-card-head__title">Ảnh minh họa trang</h2>
+                  <span class="admin-badge admin-badge--info">4 ảnh đang dùng</span>
+                </div>
+                <div class="admin-card__body">
+                  <ul class="upload-previews" aria-label="Ảnh hiện tại">
+                    <li class="upload-thumb">
+                      <img src="../../public/assets/images/about/about-01-nong-trai.jpg" alt="Nông trại thủy canh đối tác" width="1280" height="696" loading="lazy">
+                      <span class="upload-thumb__name">about-01-nong-trai.jpg</span>
+                      <button type="button" class="upload-thumb__remove" aria-label="Xóa ảnh about-01-nong-trai.jpg" data-confirm="Xóa ảnh about-01-nong-trai.jpg khỏi trang Giới thiệu?">×</button>
+                    </li>
+                    <li class="upload-thumb">
+                      <img src="../../public/assets/images/about/about-02-nguyen-lieu.jpg" alt="Nguyên liệu tươi mỗi sáng" width="1200" height="1126" loading="lazy">
+                      <span class="upload-thumb__name">about-02-nguyen-lieu.jpg</span>
+                      <button type="button" class="upload-thumb__remove" aria-label="Xóa ảnh about-02-nguyen-lieu.jpg" data-confirm="Xóa ảnh about-02-nguyen-lieu.jpg khỏi trang Giới thiệu?">×</button>
+                    </li>
+                    <li class="upload-thumb">
+                      <img src="../../public/assets/images/about/about-03-che-bien.jpg" alt="Khu chế biến và ép lạnh" width="1400" height="933" loading="lazy">
+                      <span class="upload-thumb__name">about-03-che-bien.jpg</span>
+                      <button type="button" class="upload-thumb__remove" aria-label="Xóa ảnh about-03-che-bien.jpg" data-confirm="Xóa ảnh about-03-che-bien.jpg khỏi trang Giới thiệu?">×</button>
+                    </li>
+                    <li class="upload-thumb">
+                      <img src="../../public/assets/images/about/about-04-doi-ngu.jpg" alt="Đội ngũ Verde Sana" width="1024" height="1024" loading="lazy">
+                      <span class="upload-thumb__name">about-04-doi-ngu.jpg</span>
+                      <button type="button" class="upload-thumb__remove" aria-label="Xóa ảnh about-04-doi-ngu.jpg" data-confirm="Xóa ảnh about-04-doi-ngu.jpg khỏi trang Giới thiệu?">×</button>
+                    </li>
+                  </ul>
+
+                  <div class="admin-field" style="margin-top: 16px;">
+                    <span class="admin-label">Tải thêm ảnh</span>
+                    <label class="upload-drop" data-upload-drop data-preview="aboutNewImages" data-max-mb="2">
+                      <input class="upload-drop__input" type="file" name="anh_minh_hoa[]" accept="image/jpeg,image/png,image/webp" multiple>
+                      <span class="upload-drop__title">Kéo thả ảnh vào đây hoặc bấm để chọn</span>
+                      <span class="upload-drop__hint">JPG, PNG, WEBP · tối đa 2 MB mỗi ảnh · nên dùng ảnh ngang 1600px</span>
+                    </label>
+                    <ul id="aboutNewImages" class="upload-previews" aria-label="Ảnh sắp tải lên"></ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Cột phải: SEO & lưu -->
+            <div>
+              <section class="admin-card" aria-labelledby="aboutSeoTitle">
+                <div class="admin-card-head">
+                  <h2 id="aboutSeoTitle" class="admin-card-head__title">Tối ưu SEO</h2>
+                </div>
+                <div class="admin-card__body admin-form-grid">
+                  <div class="admin-field is-full">
+                    <label class="admin-label" for="metaTitle">Meta title <span class="req">*</span></label>
+                    <input class="admin-input" id="metaTitle" name="meta_title" type="text" required maxlength="70" data-counter="metaTitleCount" value="Giới thiệu — Công ty TNHH Verde Sana" data-msg-required="Vui lòng nhập meta title.">
+                    <p class="admin-counter" id="metaTitleCount" aria-live="polite">0/70 ký tự</p>
+                  </div>
+                  <div class="admin-field is-full">
+                    <label class="admin-label" for="metaDesc">Meta description <span class="req">*</span></label>
+                    <textarea class="admin-textarea" id="metaDesc" name="meta_description" required minlength="50" maxlength="160" rows="4" data-counter="metaDescCount" data-msg-required="Vui lòng nhập meta description.">Câu chuyện thương hiệu Verde Sana: rau thủy canh tuyển chọn mỗi sáng, công nghệ ép lạnh giữ trọn dưỡng chất và đội ngũ chuyên gia dinh dưỡng.</textarea>
+                    <p class="admin-counter" id="metaDescCount" aria-live="polite">0/160 ký tự</p>
+                  </div>
+                  <div class="admin-field is-full">
+                    <label class="admin-label" for="metaKeywords">Từ khóa</label>
+                    <input class="admin-input" id="metaKeywords" name="meta_keywords" type="text" maxlength="255" value="Verde Sana, giới thiệu, rau thủy canh, nước ép lạnh">
+                    <p class="admin-hint">Phân cách các từ khóa bằng dấu phẩy.</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="admin-card" aria-labelledby="aboutInfoTitle" style="margin-top: 20px;">
+                <div class="admin-card-head">
+                  <h2 id="aboutInfoTitle" class="admin-card-head__title">Thông tin cập nhật</h2>
+                </div>
+                <div class="admin-card__body">
+                  <dl class="admin-meta-list">
+                    <dt>Mã trang</dt><dd>gioi-thieu</dd>
+                    <dt>Cập nhật lần cuối</dt><dd>27/11/2026 21:40</dd>
+                    <dt>Người cập nhật</dt><dd>Quản trị viên (AD01)</dd>
+                  </dl>
+                </div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="admin-btn admin-btn--primary">Lưu thay đổi</button>
+                  <button type="reset" class="admin-btn admin-btn--ghost">Hoàn tác</button>
+                </div>
+              </section>
+            </div>
           </div>
-        </section>
+        </form>
       </main>
     </div>
   </div>
 
   <script src="../../public/assets/js/admin.js"></script>
+  <script src="../../public/assets/vendor/mini-editor/mini-editor.js"></script>
   <script src="../../public/assets/js/validator.js"></script>
+  <script src="../../public/assets/js/upload-preview.js"></script>
+  <script src="../../public/assets/js/faq.js"></script>
 </body>
 </html>
