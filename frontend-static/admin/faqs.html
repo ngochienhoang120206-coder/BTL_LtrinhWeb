@@ -1,10 +1,10 @@
-<!--giữ nguyên phần Sidebar + Topbar, chỉ thay đổi tiêu đề và ruột bên trong <main>-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản trị — Công ty TNHH Verde Sana</title>
+  <title>Quản lý Hỏi/đáp (FAQ) — Quản trị Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,6 +13,8 @@
   <!-- 2. Biến màu & tùy biến thương hiệu Verde Sana -->
   <link rel="stylesheet" href="../../public/assets/css/variables.css">
   <link rel="stylesheet" href="../../public/assets/css/admin-custom.css">
+  <!-- 3. CSS riêng [R2] -->
+  <link rel="stylesheet" href="../../public/assets/css/about-faq.css">
 </head>
 <body class="admin-body">
   <div id="adminOverlay" class="admin-overlay" aria-hidden="true"></div>
@@ -22,7 +24,7 @@
     <aside id="adminSidebar" class="admin-sidebar" aria-label="Menu quản trị">
       <div class="admin-sidebar__brand">
         <a href="dashboard.html" class="admin-sidebar__logo">
-          <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
+          <img src="../../public/assets/images/brand/logo-verdesana.svg" alt="Logo Verde Sana" width="32" height="32">
           <span>Verde Sana Admin</span>
         </a>
         <button id="adminSidebarClose" class="admin-sidebar__close" type="button" aria-label="Đóng menu">×</button>
@@ -31,7 +33,7 @@
       <nav class="admin-nav">
         <p class="admin-nav__group">Tổng quan</p>
         <ul class="admin-nav__list">
-          <li><a class="admin-nav__link is-active" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
+          <li><a class="admin-nav__link" href="dashboard.html"><span>Bảng điều khiển</span><span class="admin-nav__tag">C3</span></a></li>
         </ul>
 
         <p class="admin-nav__group">Hệ thống & Liên hệ (TV1)</p>
@@ -44,7 +46,7 @@
         <ul class="admin-nav__list">
           <li><a class="admin-nav__link" href="users.html"><span>Quản lý người dùng</span><span class="admin-nav__tag">C6</span></a></li>
           <li><a class="admin-nav__link" href="about.html"><span>Trang Giới thiệu</span><span class="admin-nav__tag">R2</span></a></li>
-          <li><a class="admin-nav__link" href="faqs.html"><span>Câu hỏi Hỏi/đáp (FAQ)</span><span class="admin-nav__tag">R2</span></a></li>
+          <li><a class="admin-nav__link is-active" href="faqs.html" aria-current="page"><span>Câu hỏi Hỏi/đáp (FAQ)</span><span class="admin-nav__tag">R2</span></a></li>
         </ul>
 
         <p class="admin-nav__group">Kinh doanh & Salad (TV3)</p>
@@ -67,7 +69,7 @@
       <header class="admin-topbar">
         <div class="admin-topbar__left">
           <button id="adminMenuToggle" class="admin-menu-toggle" type="button" aria-label="Mở menu quản trị" aria-expanded="false">☰</button>
-          <p class="admin-breadcrumb">Quản trị / <strong>Tên phân hệ hiện tại</strong></p>
+          <p class="admin-breadcrumb">Quản trị / Nội dung / <strong>Hỏi/đáp (FAQ)</strong></p>
         </div>
 
         <div class="admin-topbar__right">
@@ -85,64 +87,203 @@
         </div>
       </header>
 
-      <!-- NỘI DUNG TỪNG TRANG ADMIN (BẢNG MẪU CÓ PHÂN TRANG) -->
+      <!-- NỘI DUNG: QUẢN LÝ CÂU HỎI (CAUHOI_FAQ) & NHÓM CÂU HỎI (NHOM_CAUHOI) -->
       <main class="admin-content">
         <div class="admin-page-head">
-          <h1 class="admin-page-title">Danh sách quản lý mẫu</h1>
-          <a href="#them-moi" class="admin-btn admin-btn--primary">+ Thêm mới</a>
+          <h1 class="admin-page-title">Câu hỏi Hỏi/đáp (FAQ)</h1>
+          <div class="admin-actions">
+            <a href="../client/faq.html" class="admin-btn admin-btn--ghost">Xem trang Hỏi/đáp</a>
+            <a href="#faqForm" class="admin-btn admin-btn--primary">+ Thêm câu hỏi</a>
+          </div>
         </div>
 
-        <section class="admin-card" aria-label="Bảng dữ liệu quản trị">
+        <section class="admin-card" aria-labelledby="faqTableTitle">
+          <div class="admin-card-head">
+            <h2 id="faqTableTitle" class="admin-card-head__title">Danh sách câu hỏi</h2>
+          </div>
+
           <!-- Thanh tìm kiếm & lọc -->
           <div class="admin-toolbar">
             <form class="admin-filter-form" action="#" method="get" data-validate="true">
-              <input class="admin-input" type="search" name="keyword" placeholder="Tìm kiếm theo từ khóa..." aria-label="Tìm kiếm theo từ khóa">
-              <select class="admin-select" name="status" aria-label="Lọc theo trạng thái">
+              <input class="admin-input" type="search" name="keyword" placeholder="Tìm theo nội dung câu hỏi..." aria-label="Tìm theo nội dung câu hỏi">
+              <select class="admin-select" name="ma_nhom" aria-label="Lọc theo nhóm câu hỏi">
+                <option value="">Tất cả nhóm</option>
+                <option value="1">Đặt hàng & Giao nhận</option>
+                <option value="2">Build-Your-Own Salad</option>
+                <option value="3">Cold-Pressed Juice & Detox</option>
+                <option value="4">Tài khoản & Thanh toán</option>
+              </select>
+              <select class="admin-select" name="hien_thi" aria-label="Lọc theo trạng thái hiển thị">
                 <option value="">Tất cả trạng thái</option>
-                <option value="active">Đang hoạt động</option>
-                <option value="hidden">Tạm ẩn</option>
+                <option value="1">Đang hiển thị</option>
+                <option value="0">Tạm ẩn</option>
               </select>
               <button class="admin-btn admin-btn--primary" type="submit">Tìm kiếm</button>
             </form>
           </div>
 
-          <!-- Bảng dữ liệu mẫu -->
+          <!-- Bảng dữ liệu -->
           <div class="admin-table-wrap">
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Tên mục / Tiêu đề</th>
-                  <th>Phân loại</th>
-                  <th>Ngày cập nhật</th>
-                  <th>Trạng thái</th>
-                  <th>Thao tác</th>
+                  <th scope="col">Mã</th>
+                  <th scope="col">Câu hỏi / Trả lời</th>
+                  <th scope="col">Nhóm</th>
+                  <th scope="col">Thứ tự</th>
+                  <th scope="col">Trạng thái</th>
+                  <th scope="col">Cập nhật</th>
+                  <th scope="col">Thao tác</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>#001</td>
-                  <td><strong>Salad Cá Hồi Sốt Mè Rang</strong></td>
-                  <td>Salad</td>
-                  <td>25/11/2026</td>
+                <tr data-id="FAQ001" data-group="1" data-order="1" data-visible="1" data-answer="Chúng tôi giao nội thành TP. Hồ Chí Minh trong bán kính 10 km từ bếp trung tâm tại Quận 10. Đơn hàng thường đến tay bạn sau 30–45 phút kể từ khi được xác nhận.">
+                  <td>FAQ001</td>
+                  <td><span class="admin-faq-q">Verde Sana giao hàng trong khu vực nào và mất bao lâu?</span><span class="admin-faq-a">Chúng tôi giao nội thành TP. Hồ Chí Minh trong bán kính 10 km từ bếp trung tâm tại Quận 10. Đơn hàng thường đến tay bạn sau 30–45 phút kể từ khi được xác nhận.</span></td>
+                  <td><span class="admin-tag">Đặt hàng &amp; Giao nhận</span></td>
+                  <td>1</td>
                   <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>27/11/2026</td>
                   <td>
                     <div class="admin-actions">
-                      <a href="#sua-1" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #001?">Xóa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ001?">Xóa</button>
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td>#002</td>
-                  <td><strong>Cold-Pressed Cần Tây Táo Xanh 500ml</strong></td>
-                  <td>Cold-Pressed Juice</td>
-                  <td>25/11/2026</td>
-                  <td><span class="admin-badge admin-badge--warning">Chờ duyệt</span></td>
+                <tr data-id="FAQ002" data-group="1" data-order="2" data-visible="1" data-answer="Có. Ở bước thanh toán, bạn chọn một khung giờ giao tươi trong ngày (mỗi khung 1 tiếng, từ 08:00 đến 20:00). Đơn đặt trước 10:00 có thể chọn giao trưa cùng ngày.">
+                  <td>FAQ002</td>
+                  <td><span class="admin-faq-q">Tôi có thể chọn khung giờ giao hàng không?</span><span class="admin-faq-a">Có. Ở bước thanh toán, bạn chọn một khung giờ giao tươi trong ngày (mỗi khung 1 tiếng, từ 08:00 đến 20:00). Đơn đặt trước 10:00 có thể chọn giao trưa cùng ngày.</span></td>
+                  <td><span class="admin-tag">Đặt hàng &amp; Giao nhận</span></td>
+                  <td>2</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>27/11/2026</td>
                   <td>
                     <div class="admin-actions">
-                      <a href="#sua-2" class="admin-btn admin-btn--info admin-btn--sm">Sửa</a>
-                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa mục #002?">Xóa</button>
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ002?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ003" data-group="1" data-order="3" data-visible="1" data-answer="Phí giao hàng là 15.000đ cho mỗi đơn. Đơn từ 250.000đ trở lên được miễn phí giao hàng. Phí cụ thể luôn được hiển thị ở bước thanh toán trước khi bạn xác nhận đơn.">
+                  <td>FAQ003</td>
+                  <td><span class="admin-faq-q">Phí giao hàng được tính như thế nào?</span><span class="admin-faq-a">Phí giao hàng là 15.000đ cho mỗi đơn. Đơn từ 250.000đ trở lên được miễn phí giao hàng. Phí cụ thể luôn được hiển thị ở bước thanh toán trước khi bạn xác nhận đơn.</span></td>
+                  <td><span class="admin-tag">Đặt hàng &amp; Giao nhận</span></td>
+                  <td>3</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>26/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ003?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ004" data-group="1" data-order="4" data-visible="1" data-answer="Với đơn từ 20 phần trở lên, bạn vui lòng gửi yêu cầu tại trang Liên hệ &amp; Đặt tiệc doanh nghiệp hoặc gọi hotline 028 3868 9999. Chúng tôi sẽ liên hệ lại trong vòng 2 giờ làm việc để tư vấn thực đơn.">
+                  <td>FAQ004</td>
+                  <td><span class="admin-faq-q">Tôi muốn đặt Salad cho tiệc công ty số lượng lớn thì làm sao?</span><span class="admin-faq-a">Với đơn từ 20 phần trở lên, bạn vui lòng gửi yêu cầu tại trang Liên hệ &amp; Đặt tiệc doanh nghiệp hoặc gọi hotline 028 3868 9999. Chúng tôi sẽ liên hệ lại trong vòng 2 giờ làm việc để tư vấn thực đơn.</span></td>
+                  <td><span class="admin-tag">Đặt hàng &amp; Giao nhận</span></td>
+                  <td>4</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>26/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ004?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ005" data-group="2" data-order="1" data-visible="1" data-answer="Tại trang Tự trộn Salad &amp; Bảng giá , bạn chọn lần lượt bốn nhóm thành phần: Nền rau (Base) – chọn 1 loại. Đạm (Protein) – chọn 1 đến 2 loại. Topping – chọn tối đa 4 loại. Sauce – chọn 1 loại. Hệ thống tự cộng tổng tiền và tổng calo, sau đó bạn thêm thẳng tô Salad vào giỏ hàng.">
+                  <td>FAQ005</td>
+                  <td><span class="admin-faq-q">Tự trộn Salad hoạt động như thế nào?</span><span class="admin-faq-a">Tại trang Tự trộn Salad &amp; Bảng giá , bạn chọn lần lượt bốn nhóm thành phần: Nền rau (Base) – chọn 1 loại. Đạm (Protein) – chọn 1 đến 2 loại. Topping – chọn tối đa 4 loại. Sauce – chọn 1 loại. Hệ thống tự cộng tổng tiền và tổng calo, sau đó bạn thêm thẳng tô Salad vào giỏ hàng.</span></td>
+                  <td><span class="admin-tag">Build-Your-Own Salad</span></td>
+                  <td>1</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>25/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ005?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ006" data-group="2" data-order="2" data-visible="1" data-answer="Mỗi Sauce đều ghi rõ thành phần dễ gây dị ứng. Sốt mè rang có mè, sốt Thái có đậu phộng và nước mắm. Nếu bạn dị ứng, hãy chọn sốt dầu giấm Balsamic hoặc sốt chanh dây, đồng thời ghi chú dị ứng ở bước thanh toán để bếp dùng dụng cụ riêng.">
+                  <td>FAQ006</td>
+                  <td><span class="admin-faq-q">Tôi bị dị ứng đậu phộng, mè hoặc hải sản thì nên chọn Sauce nào?</span><span class="admin-faq-a">Mỗi Sauce đều ghi rõ thành phần dễ gây dị ứng. Sốt mè rang có mè, sốt Thái có đậu phộng và nước mắm. Nếu bạn dị ứng, hãy chọn sốt dầu giấm Balsamic hoặc sốt chanh dây, đồng thời ghi chú dị ứng ở bước thanh toán để bếp dùng dụng cụ riêng.</span></td>
+                  <td><span class="admin-tag">Build-Your-Own Salad</span></td>
+                  <td>2</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>25/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ006?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ007" data-group="2" data-order="3" data-visible="1" data-answer="Calo của từng thành phần được chuyên gia dinh dưỡng tính theo định lượng chuẩn của một phần. Tổng calo là giá trị tham khảo và có thể chênh lệch khoảng 5–10% tùy độ chín của rau củ.">
+                  <td>FAQ007</td>
+                  <td><span class="admin-faq-q">Lượng calo hiển thị có chính xác không?</span><span class="admin-faq-a">Calo của từng thành phần được chuyên gia dinh dưỡng tính theo định lượng chuẩn của một phần. Tổng calo là giá trị tham khảo và có thể chênh lệch khoảng 5–10% tùy độ chín của rau củ.</span></td>
+                  <td><span class="admin-tag">Build-Your-Own Salad</span></td>
+                  <td>3</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>24/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ007?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ008" data-group="2" data-order="4" data-visible="0" data-answer="Được. Ở ô “Ghi chú ăn kiêng” khi thanh toán, bạn có thể ghi “ít sốt” hoặc “để sốt riêng”. Mặc định Verde Sana luôn đóng Sauce trong hũ riêng để rau giữ được độ giòn.">
+                  <td>FAQ008</td>
+                  <td><span class="admin-faq-q">Tôi có thể yêu cầu ít sốt hoặc để sốt riêng không?</span><span class="admin-faq-a">Được. Ở ô “Ghi chú ăn kiêng” khi thanh toán, bạn có thể ghi “ít sốt” hoặc “để sốt riêng”. Mặc định Verde Sana luôn đóng Sauce trong hũ riêng để rau giữ được độ giòn.</span></td>
+                  <td><span class="admin-tag">Build-Your-Own Salad</span></td>
+                  <td>4</td>
+                  <td><span class="admin-badge admin-badge--warning">Tạm ẩn</span></td>
+                  <td>24/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Hiện</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ008?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ009" data-group="3" data-order="1" data-visible="1" data-answer="Nước ép Cold-Pressed dùng ngon nhất trong 72 giờ kể từ ngày ép in trên nắp chai, khi được bảo quản liên tục ở 2–6°C. Sau khi mở nắp, bạn nên uống hết trong ngày.">
+                  <td>FAQ009</td>
+                  <td><span class="admin-faq-q">Nước ép lạnh bảo quản được bao lâu?</span><span class="admin-faq-a">Nước ép Cold-Pressed dùng ngon nhất trong 72 giờ kể từ ngày ép in trên nắp chai, khi được bảo quản liên tục ở 2–6°C. Sau khi mở nắp, bạn nên uống hết trong ngày.</span></td>
+                  <td><span class="admin-tag">Cold-Pressed Juice &amp; Detox</span></td>
+                  <td>1</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>23/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ009?">Xóa</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="FAQ010" data-group="3" data-order="2" data-visible="1" data-answer="Không. Nước ép lạnh không dùng chất ổn định nên phần thịt quả sẽ lắng xuống tự nhiên. Bạn chỉ cần lắc đều trước khi uống. Nếu nước ép có mùi chua lạ hoặc nắp bị phồng, vui lòng không sử dụng và liên hệ để được đổi mới.">
+                  <td>FAQ010</td>
+                  <td><span class="admin-faq-q">Vì sao nước ép bị tách lớp? Có phải bị hỏng không?</span><span class="admin-faq-a">Không. Nước ép lạnh không dùng chất ổn định nên phần thịt quả sẽ lắng xuống tự nhiên. Bạn chỉ cần lắc đều trước khi uống. Nếu nước ép có mùi chua lạ hoặc nắp bị phồng, vui lòng không sử dụng và liên hệ để được đổi mới.</span></td>
+                  <td><span class="admin-tag">Cold-Pressed Juice &amp; Detox</span></td>
+                  <td>2</td>
+                  <td><span class="admin-badge admin-badge--success">Đang hiển thị</span></td>
+                  <td>23/11/2026</td>
+                  <td>
+                    <div class="admin-actions">
+                      <button type="button" class="admin-btn admin-btn--info admin-btn--sm" data-faq-edit>Sửa</button>
+                      <button type="button" class="admin-btn admin-btn--warning admin-btn--sm" data-faq-toggle>Ẩn</button>
+                      <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Bạn có chắc chắn muốn xóa câu hỏi FAQ010?">Xóa</button>
                     </div>
                   </td>
                 </tr>
@@ -152,23 +293,111 @@
 
           <!-- Thanh phân trang chuẩn (Pagination) -->
           <div class="admin-pagination-bar">
-            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 42 bản ghi</p>
-            <nav aria-label="Phân trang dữ liệu">
+            <p class="admin-pagination-info">Hiển thị 1–10 trên tổng số 16 câu hỏi</p>
+            <nav aria-label="Phân trang câu hỏi">
               <ul class="admin-pagination">
                 <li><a class="admin-pagination__link is-disabled" href="#">« Trước</a></li>
                 <li><a class="admin-pagination__link is-active" href="?page=1" aria-current="page">1</a></li>
                 <li><a class="admin-pagination__link" href="?page=2">2</a></li>
-                <li><a class="admin-pagination__link" href="?page=3">3</a></li>
                 <li><a class="admin-pagination__link" href="?page=2">Sau »</a></li>
               </ul>
             </nav>
           </div>
         </section>
+
+        <div class="admin-layout-2col" style="margin-top: 20px;">
+          <!-- Form thêm / sửa câu hỏi -->
+          <section class="admin-card" aria-labelledby="faqFormTitle">
+            <div class="admin-card-head">
+              <h2 id="faqFormTitle" class="admin-card-head__title">Thêm câu hỏi mới</h2>
+            </div>
+            <form id="faqForm" action="#" method="post" data-validate="true" data-static-demo="Câu hỏi hợp lệ. Ở Giai đoạn 2 câu hỏi sẽ được lưu vào CSDL (bảng CAUHOI_FAQ).">
+              <input type="hidden" name="csrf_token" value="">
+              <input type="hidden" name="ma_ch" value="">
+              <div class="admin-card__body admin-form-grid">
+                <div class="admin-field">
+                  <label class="admin-label" for="faqGroup">Nhóm câu hỏi <span class="req">*</span></label>
+                  <select class="admin-select" id="faqGroup" name="ma_nhom" required data-msg-required="Vui lòng chọn nhóm câu hỏi.">
+                    <option value="">-- Chọn nhóm --</option>
+                    <option value="1">Đặt hàng & Giao nhận</option>
+                    <option value="2">Build-Your-Own Salad</option>
+                    <option value="3">Cold-Pressed Juice & Detox</option>
+                    <option value="4">Tài khoản & Thanh toán</option>
+                  </select>
+                </div>
+                <div class="admin-field">
+                  <label class="admin-label" for="faqOrder">Thứ tự hiển thị <span class="req">*</span></label>
+                  <input class="admin-input" id="faqOrder" name="thu_tu" type="number" min="1" max="99" value="1" required data-msg-required="Vui lòng nhập thứ tự hiển thị.">
+                </div>
+                <div class="admin-field is-full">
+                  <label class="admin-label" for="faqQuestion">Câu hỏi <span class="req">*</span></label>
+                  <input class="admin-input" id="faqQuestion" name="cau_hoi" type="text" required minlength="10" maxlength="255" placeholder="Ví dụ: Nước ép lạnh bảo quản được bao lâu?" data-msg-required="Vui lòng nhập nội dung câu hỏi.">
+                </div>
+                <div class="admin-field is-full">
+                  <label class="admin-label" for="faqAnswer">Câu trả lời <span class="req">*</span></label>
+                  <textarea class="admin-textarea" id="faqAnswer" name="tra_loi" required minlength="20" maxlength="2000" rows="6" data-counter="faqAnswerCount" placeholder="Trả lời ngắn gọn, rõ ràng..." data-msg-required="Vui lòng nhập câu trả lời."></textarea>
+                  <p class="admin-counter" id="faqAnswerCount" aria-live="polite">0/2000 ký tự</p>
+                </div>
+                <div class="admin-field is-full">
+                  <label class="admin-check" for="faqVisible">
+                    <input id="faqVisible" name="hien_thi" type="checkbox" value="1" checked>
+                    Hiển thị câu hỏi này trên trang Hỏi/đáp
+                  </label>
+                </div>
+              </div>
+              <div class="admin-form-actions">
+                <button type="submit" class="admin-btn admin-btn--primary" id="faqSubmit">Lưu câu hỏi</button>
+                <button type="reset" class="admin-btn admin-btn--ghost">Hủy</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Nhóm câu hỏi -->
+          <section class="admin-card" aria-labelledby="faqGroupTitle">
+            <div class="admin-card-head">
+              <h2 id="faqGroupTitle" class="admin-card-head__title">Nhóm câu hỏi</h2>
+            </div>
+            <div class="admin-card__body">
+              <ul class="admin-group-list">
+                <li>
+                  <span><span class="admin-group-list__name">Đặt hàng & Giao nhận</span><span class="admin-group-list__meta">Thứ tự 1 · 4 câu hỏi</span></span>
+                  <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Xóa nhóm “Đặt hàng & Giao nhận”? Chỉ xóa được khi nhóm không còn câu hỏi.">Xóa</button>
+                </li>
+                <li>
+                  <span><span class="admin-group-list__name">Build-Your-Own Salad</span><span class="admin-group-list__meta">Thứ tự 2 · 4 câu hỏi</span></span>
+                  <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Xóa nhóm “Build-Your-Own Salad”? Chỉ xóa được khi nhóm không còn câu hỏi.">Xóa</button>
+                </li>
+                <li>
+                  <span><span class="admin-group-list__name">Cold-Pressed Juice & Detox</span><span class="admin-group-list__meta">Thứ tự 3 · 4 câu hỏi</span></span>
+                  <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Xóa nhóm “Cold-Pressed Juice & Detox”? Chỉ xóa được khi nhóm không còn câu hỏi.">Xóa</button>
+                </li>
+                <li>
+                  <span><span class="admin-group-list__name">Tài khoản & Thanh toán</span><span class="admin-group-list__meta">Thứ tự 4 · 4 câu hỏi</span></span>
+                  <button type="button" class="admin-btn admin-btn--danger admin-btn--sm" data-confirm="Xóa nhóm “Tài khoản & Thanh toán”? Chỉ xóa được khi nhóm không còn câu hỏi.">Xóa</button>
+                </li>
+              </ul>
+
+              <form class="admin-inline-form" action="#" method="post" data-validate="true" data-static-demo="Tên nhóm hợp lệ. Ở Giai đoạn 2 nhóm sẽ được lưu vào CSDL (bảng NHOM_CAUHOI).">
+                <input type="hidden" name="csrf_token" value="">
+                <div class="admin-field">
+                  <label class="admin-label" for="groupName">Tên nhóm mới <span class="req">*</span></label>
+                  <input class="admin-input" id="groupName" name="ten_nhom" type="text" required minlength="3" maxlength="100" data-msg-required="Vui lòng nhập tên nhóm.">
+                </div>
+                <div class="admin-field">
+                  <label class="admin-label" for="groupOrder">Thứ tự</label>
+                  <input class="admin-input" id="groupOrder" name="thu_tu" type="number" min="1" max="99" value="5">
+                </div>
+                <button type="submit" class="admin-btn admin-btn--primary">+ Thêm nhóm</button>
+              </form>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   </div>
 
   <script src="../../public/assets/js/admin.js"></script>
   <script src="../../public/assets/js/validator.js"></script>
+  <script src="../../public/assets/js/faq.js"></script>
 </body>
 </html>

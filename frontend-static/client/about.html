@@ -1,12 +1,12 @@
-<!--Chỉ cần giữ nguyên <header> và <footer>, chuyển class is-active sang đúng mục menu của trang đó và viết nội dung riêng trong <main>-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Công ty TNHH Verde Sana — Build-Your-Own Salad kết hợp Sauce tự chọn, Cold-Pressed Juice, Smoothie và Detox nguyên chất.">
-  <meta name="keywords" content="Verde Sana, salad tự trộn, nước ép lạnh, cold-pressed juice, smoothie, detox">
-  <title>Tên trang — Công ty TNHH Verde Sana</title>
+  <meta name="description" content="Câu chuyện thương hiệu Verde Sana: rau thủy canh tuyển chọn mỗi sáng, công nghệ ép lạnh Cold-Pressed giữ trọn dưỡng chất và đội ngũ chuyên gia dinh dưỡng đồng hành cùng bạn.">
+  <meta name="keywords" content="Verde Sana, giới thiệu Verde Sana, rau thủy canh, nước ép lạnh, cold-pressed juice, chuyên gia dinh dưỡng">
+  <title>Giới thiệu — Công ty TNHH Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
 
   <!-- Google Fonts chuẩn Tiếng Việt: Lora (Tiêu đề) & Be Vietnam Pro (Nội dung) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,14 +16,15 @@
   <!-- CSS dùng chung từ public/assets/ -->
   <link rel="stylesheet" href="../../public/assets/css/variables.css">
   <link rel="stylesheet" href="../../public/assets/css/client.css">
-  <!-- Thêm CSS riêng của từng trang bên dưới dòng này nếu cần -->
+  <!-- CSS riêng [R2] Giới thiệu & Hỏi/đáp -->
+  <link rel="stylesheet" href="../../public/assets/css/about-faq.css">
 </head>
 <body>
   <!-- ==================== THANH THÔNG TIN NHANH ==================== -->
   <div class="top-bar">
     <div class="container top-bar__inner">
-      <span>Tươi mới mỗi ngày — Giao lạnh nội thành trong 45 phút</span>
-      <span>Hotline: <a href="tel:02838689999">028 3868 9999</a> | Giờ mở cửa: 07:00 – 21:00</span>
+      <span>Tươi xanh mỗi ngày – Trọn vị lành mạnh</span>
+      <span>Hotline: <a href="tel:02838689999">028 3868 9999</a> | Giờ mở cửa: 08:00 – 20:00 (Thứ Hai – Chủ Nhật)</span>
     </div>
   </div>
 
@@ -31,7 +32,7 @@
   <header id="siteHeader" class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Công ty TNHH Verde Sana" width="42" height="42">
+        <img src="../../public/assets/images/brand/logo-verdesana.png" alt="Logo Công ty TNHH Verde Sana" width="42" height="42">
         <span class="brand__text">
           <span class="brand__name">Verde Sana</span>
           <span class="brand__tagline">FRESH SALAD & COLD-PRESSED</span>
@@ -40,8 +41,8 @@
 
       <nav id="mainNav" class="main-nav" aria-label="Điều hướng chính">
         <ul class="main-nav__list">
-          <li><a class="main-nav__link is-active" href="index.html">Trang chủ</a></li>
-          <li><a class="main-nav__link" href="about.html">Giới thiệu</a></li>
+          <li><a class="main-nav__link" href="index.html">Trang chủ</a></li>
+          <li><a class="main-nav__link is-active" href="about.html" aria-current="page">Giới thiệu</a></li>
           <li><a class="main-nav__link" href="products.html">Thực đơn</a></li>
           <li><a class="main-nav__link main-nav__link--accent" href="salad-builder.html">Tự trộn Salad & Bảng giá</a></li>
           <li><a class="main-nav__link" href="news.html">Tin tức</a></li>
@@ -62,13 +63,226 @@
     </div>
   </header>
 
-  <!-- ==================== NỘI DUNG RIÊNG CỦA TỪNG TRANG ==================== -->
+  <!-- ==================== NỘI DUNG TRANG GIỚI THIỆU ==================== -->
   <main class="site-main">
-    <div class="container" style="padding-top: 40px; padding-bottom: 40px;">
-      <!-- Thành viên viết toàn bộ nội dung trang của mình tại đây -->
-      <h1>Tiêu đề trang mẫu</h1>
-      <p>Thay thế vùng này bằng nội dung HTML5 chuẩn W3C của trang tương ứng.</p>
-    </div>
+    <!-- 1. Hero -->
+    <section class="page-hero" aria-labelledby="aboutTitle">
+      <div class="container">
+        <nav aria-label="Đường dẫn trang">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li aria-current="page">Giới thiệu</li>
+          </ol>
+        </nav>
+        <h1 id="aboutTitle" class="page-hero__title">Về Verde Sana</h1>
+        <p class="page-hero__lead">Từ một căn bếp nhỏ ở Quận 10, Verde Sana lớn lên cùng một niềm tin giản dị: bữa ăn lành mạnh phải tươi, ngon và do chính bạn lựa chọn.</p>
+      </div>
+    </section>
+
+    <!-- 2. Câu chuyện thương hiệu -->
+    <section class="section" aria-labelledby="storyTitle">
+      <div class="container story">
+        <div class="story__text" data-reveal>
+          <span class="section-eyebrow">Câu chuyện thương hiệu</span>
+          <h2 id="storyTitle" class="section-title">Bắt đầu từ một tô Salad do chính bạn trộn</h2>
+          <p>Verde Sana – trong tiếng Ý nghĩa là “xanh và khỏe”. Năm 2022, ba người bạn làm việc văn phòng nhận ra mình luôn phải chọn giữa bữa trưa nhanh gọn và bữa trưa tốt cho sức khỏe. Chúng tôi muốn có cả hai, nên đã mở quầy Salad đầu tiên với một ý tưởng khác biệt: <strong>khách hàng tự chọn từng thành phần</strong>.</p>
+          <p>Mô hình Build-Your-Own Salad cho phép bạn kết hợp nền rau, nguồn đạm, topping và Sauce theo khẩu vị và mục tiêu dinh dưỡng của riêng mình. Bên cạnh đó là dòng nước ép lạnh Cold-Pressed, sinh tố và nước Detox nguyên chất được pha mới mỗi ngày.</p>
+          <blockquote class="story__quote">
+            “Chúng tôi không bán một thực đơn cố định. Chúng tôi trao cho bạn quyền tự do sáng tạo bữa ăn của mình.”
+            <footer>— Đội ngũ sáng lập Verde Sana</footer>
+          </blockquote>
+        </div>
+        <div class="story__media" data-reveal>
+          <img src="../../public/assets/images/about/about-02-nguyen-lieu.jpg" alt="Rau củ và nguyên liệu tươi được sơ chế mỗi sáng tại bếp Verde Sana" width="1200" height="1126" loading="lazy">
+          <p class="story__badge"><strong>100%</strong>nguyên liệu nhập trong ngày</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Con số nổi bật -->
+    <section class="section section--soft" aria-labelledby="statsTitle">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Verde Sana qua những con số</span>
+          <h2 id="statsTitle" class="section-title">Tươi mới mỗi ngày, bền bỉ mỗi năm</h2>
+        </div>
+        <ul class="stats">
+          <li class="stats__item" data-reveal><span class="stats__value">40+</span><span class="stats__label">thành phần cho tô Salad tự trộn</span></li>
+          <li class="stats__item" data-reveal><span class="stats__value">12</span><span class="stats__label">nông trại thủy canh đối tác tại Lâm Đồng</span></li>
+          <li class="stats__item" data-reveal><span class="stats__value">72h</span><span class="stats__label">hạn dùng nước ép lạnh khi bảo quản 2–6°C</span></li>
+          <li class="stats__item" data-reveal><span class="stats__value">50.000+</span><span class="stats__label">tô Salad đã được phục vụ</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Quy trình chọn rau thủy canh -->
+    <section class="section" aria-labelledby="processTitle">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Từ nông trại đến bàn ăn</span>
+          <h2 id="processTitle" class="section-title">Quy trình chọn rau thủy canh đạt chuẩn</h2>
+          <p class="section-desc">Mỗi lá rau trong tô Salad của bạn đều đi qua bốn bước kiểm soát chất lượng trước khi được giao đi.</p>
+        </div>
+        <ol class="process">
+          <li class="process__step" data-reveal>
+            <h3 class="process__title">Canh tác thủy canh</h3>
+            <p class="process__text">Rau được trồng trong nhà màng tại Đà Lạt bằng dung dịch dinh dưỡng kiểm soát, không dùng thuốc trừ sâu hóa học.</p>
+          </li>
+          <li class="process__step" data-reveal>
+            <h3 class="process__title">Thu hoạch lúc sáng sớm</h3>
+            <p class="process__text">Rau được cắt từ 4–6 giờ sáng khi lá còn giòn, đóng thùng lạnh và chuyển về bếp trung tâm trong ngày.</p>
+          </li>
+          <li class="process__step" data-reveal>
+            <h3 class="process__title">Kiểm tra & sơ chế</h3>
+            <p class="process__text">Bếp kiểm tra cảm quan, rửa qua ba lần nước lọc và nước ozone, loại bỏ lá dập trước khi chia phần.</p>
+          </li>
+          <li class="process__step" data-reveal>
+            <h3 class="process__title">Bảo quản chuỗi lạnh</h3>
+            <p class="process__text">Nguyên liệu được giữ ở 2–6°C cho đến khi trộn, và được giao bằng túi giữ lạnh để luôn tươi khi đến tay bạn.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 5. Công nghệ ép lạnh -->
+    <section class="section section--soft" aria-labelledby="coldTitle">
+      <div class="container coldpress">
+        <div class="coldpress__media" data-reveal>
+          <img src="../../public/assets/images/about/about-03-che-bien.jpg" alt="Nhân viên Verde Sana chế biến nước ép lạnh trong bếp trung tâm" width="1400" height="933" loading="lazy">
+        </div>
+        <div data-reveal>
+          <span class="section-eyebrow">Công nghệ Cold-Pressed</span>
+          <h2 id="coldTitle" class="section-title">Ép lạnh để giữ trọn dưỡng chất</h2>
+          <p>Thay vì lưỡi dao quay tốc độ cao, máy ép thủy lực ép rau củ trái cây bằng lực nén từ từ. Nước ép không bị nóng lên và ít tiếp xúc với không khí, nhờ đó giữ được nhiều vitamin, enzyme và màu sắc tự nhiên hơn.</p>
+          <table class="compare">
+            <caption>So sánh hai phương pháp ép</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tiêu chí</th>
+                <th scope="col">Ép lạnh (Cold-Pressed)</th>
+                <th scope="col">Ép ly tâm thông thường</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Nhiệt sinh ra</th><td>Gần như không</td><td>Cao do dao quay nhanh</td></tr>
+              <tr><th scope="row">Mức oxy hóa</th><td>Thấp, ít tách lớp</td><td>Cao, nhanh tách lớp</td></tr>
+              <tr><th scope="row">Thời hạn dùng</th><td>Đến 72 giờ (2–6°C)</td><td>Nên uống ngay</td></tr>
+              <tr><th scope="row">Lượng nước thu được</th><td>Nhiều hơn, ít bã</td><td>Ít hơn</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Tầm nhìn – Sứ mệnh – Giá trị cốt lõi -->
+    <section class="section" aria-labelledby="valuesTitle">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Định hướng phát triển</span>
+          <h2 id="valuesTitle" class="section-title">Tầm nhìn, sứ mệnh & giá trị cốt lõi</h2>
+        </div>
+        <div class="values">
+          <article class="value-card value-card--primary" data-reveal>
+            <h3 class="value-card__title">Tầm nhìn</h3>
+            <p>Trở thành chuỗi Salad và nước ép lạnh được người trẻ thành thị tin chọn nhất cho bữa ăn lành mạnh hằng ngày vào năm 2030.</p>
+          </article>
+          <article class="value-card" data-reveal>
+            <h3 class="value-card__title">Sứ mệnh</h3>
+            <p>Mang đến bữa ăn cân bằng, minh bạch thành phần và calo, giúp mỗi người dễ dàng xây dựng thói quen ăn uống tốt cho sức khỏe.</p>
+          </article>
+          <article class="value-card" data-reveal>
+            <h3 class="value-card__title">Giá trị cốt lõi</h3>
+            <ul>
+              <li><strong>Tươi:</strong> nguyên liệu nhập và dùng trong ngày.</li>
+              <li><strong>Minh bạch:</strong> công khai giá và calo từng thành phần.</li>
+              <li><strong>Tự do:</strong> bạn quyết định tô Salad của mình.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Đội ngũ chuyên gia dinh dưỡng -->
+    <section class="section section--soft" aria-labelledby="teamTitle">
+      <div class="container team">
+        <div class="team__photo" data-reveal>
+          <img src="../../public/assets/images/about/about-04-doi-ngu.jpg" alt="Đội ngũ đầu bếp và chuyên gia dinh dưỡng của Verde Sana" width="1024" height="1024" loading="lazy">
+        </div>
+        <div data-reveal>
+          <span class="section-eyebrow">Đội ngũ của chúng tôi</span>
+          <h2 id="teamTitle" class="section-title">Chuyên gia dinh dưỡng đồng hành cùng bạn</h2>
+          <p>Mọi công thức Salad, Sauce và liệu trình Detox đều được chuyên gia dinh dưỡng xây dựng và kiểm tra định lượng calo trước khi đưa vào thực đơn.</p>
+          <ul class="team__list">
+            <li class="expert">
+              <span class="expert__avatar" aria-hidden="true">LA</span>
+              <div>
+                <h3 class="expert__name">ThS. Lê Minh Anh</h3>
+                <p class="expert__role">Trưởng nhóm dinh dưỡng</p>
+                <p class="expert__bio">Thạc sĩ Dinh dưỡng cộng đồng, 8 năm tư vấn chế độ ăn cho người làm việc văn phòng.</p>
+              </div>
+            </li>
+            <li class="expert">
+              <span class="expert__avatar" aria-hidden="true">TK</span>
+              <div>
+                <h3 class="expert__name">Trần Quốc Khang</h3>
+                <p class="expert__role">Bếp trưởng</p>
+                <p class="expert__bio">Phụ trách công thức Sauce và quy trình sơ chế, đảm bảo vệ sinh an toàn thực phẩm tại bếp trung tâm.</p>
+              </div>
+            </li>
+            <li class="expert">
+              <span class="expert__avatar" aria-hidden="true">PH</span>
+              <div>
+                <h3 class="expert__name">Phạm Thu Hà</h3>
+                <p class="expert__role">Chuyên viên liệu trình Detox</p>
+                <p class="expert__bio">Thiết kế các gói Detox 1, 3 và 7 ngày, cân đối lượng đường tự nhiên trong từng chai nước ép.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Thư viện ảnh thực tế -->
+    <section class="section" aria-labelledby="galleryTitle">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Hình ảnh thực tế</span>
+          <h2 id="galleryTitle" class="section-title">Bên trong căn bếp Verde Sana</h2>
+        </div>
+        <div class="gallery">
+          <figure class="gallery__item" data-reveal>
+            <img src="../../public/assets/images/about/about-01-nong-trai.jpg" alt="Nông trại rau thủy canh đối tác của Verde Sana tại Đà Lạt" width="1280" height="696" loading="lazy">
+            <figcaption>Nông trại thủy canh đối tác</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <img src="../../public/assets/images/about/about-02-nguyen-lieu.jpg" alt="Nguyên liệu tươi được chia phần trước giờ mở bán" width="1200" height="1126" loading="lazy">
+            <figcaption>Nguyên liệu chuẩn bị mỗi sáng</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <img src="../../public/assets/images/about/about-03-che-bien.jpg" alt="Khu vực chế biến và ép lạnh tại bếp trung tâm" width="1400" height="933" loading="lazy">
+            <figcaption>Khu chế biến & ép lạnh</figcaption>
+          </figure>
+          <figure class="gallery__item" data-reveal>
+            <img src="../../public/assets/images/about/about-04-doi-ngu.jpg" alt="Đội ngũ nhân viên Verde Sana" width="1024" height="1024" loading="lazy">
+            <figcaption>Đội ngũ Verde Sana</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Kêu gọi hành động -->
+    <section class="container" aria-labelledby="ctaTitle">
+      <div class="cta-band" data-reveal>
+        <div>
+          <h2 id="ctaTitle" class="cta-band__title">Sẵn sàng cho tô Salad của riêng bạn?</h2>
+          <p>Chọn nền rau, đạm, topping và Sauce – hệ thống tự tính giá và calo cho bạn.</p>
+        </div>
+        <div class="cta-band__actions">
+          <a href="salad-builder.html" class="btn btn--accent">Tự trộn Salad ngay</a>
+          <a href="products.html" class="btn btn--outline">Xem thực đơn</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==================== FOOTER DÙNG CHUNG ==================== -->
@@ -77,7 +291,7 @@
       <div class="footer-grid">
         <div>
           <h2 class="footer-title">Công ty TNHH Verde Sana</h2>
-          <p class="footer-text">Chuyên cung cấp mô hình Build-Your-Own Salad kết hợp Sauce tự chọn, nước ép lạnh (Cold-Pressed Juice), sinh tố dinh dưỡng (Smoothie) và liệu trình Detox nguyên chất.</p>
+          <p class="footer-text">Verde Sana mang đến các lựa chọn Salad và thức uống từ nguyên liệu tươi, với thực đơn đa dạng và khả năng tùy chọn thành phần để phù hợp sở thích của mỗi khách hàng.</p>
           <p class="footer-text">Địa chỉ: 268 Lý Thường Kiệt, Quận 10, TP. Hồ Chí Minh</p>
         </div>
 
@@ -105,7 +319,7 @@
           <h2 class="footer-title">Liên hệ nhanh</h2>
           <p class="footer-text">Email: lienhe@verdesana.vn</p>
           <p class="footer-text">Hotline: 028 3868 9999</p>
-          <p class="footer-text">Thời gian phục vụ: 07:00 – 21:00 (Thứ 2 – Chủ nhật)</p>
+          <p class="footer-text">Giờ mở cửa: 08:00 – 20:00 (Thứ Hai – Chủ Nhật)</p>
         </div>
       </div>
 
@@ -121,6 +335,7 @@
   <!-- JS dùng chung từ public/assets/ -->
   <script src="../../public/assets/js/main.js"></script>
   <script src="../../public/assets/js/validator.js"></script>
-  <!-- Thêm JS riêng của từng trang (vd: salad-builder.js, cart.js, upload-preview.js) bên dưới -->
+  <!-- JS riêng [R2]: hiệu ứng xuất hiện khi cuộn -->
+  <script src="../../public/assets/js/faq.js"></script>
 </body>
 </html>

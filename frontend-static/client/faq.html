@@ -1,12 +1,12 @@
-<!--Chỉ cần giữ nguyên <header> và <footer>, chuyển class is-active sang đúng mục menu của trang đó và viết nội dung riêng trong <main>-->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Công ty TNHH Verde Sana — Build-Your-Own Salad kết hợp Sauce tự chọn, Cold-Pressed Juice, Smoothie và Detox nguyên chất.">
-  <meta name="keywords" content="Verde Sana, salad tự trộn, nước ép lạnh, cold-pressed juice, smoothie, detox">
-  <title>Tên trang — Công ty TNHH Verde Sana</title>
+  <meta name="description" content="Giải đáp các câu hỏi thường gặp về đặt hàng, giao nhận, tự trộn Salad, Sauce và dị ứng thành phần, bảo quản nước ép lạnh, liệu trình Detox và tài khoản tại Verde Sana.">
+  <meta name="keywords" content="Verde Sana, hỏi đáp, FAQ, bảo quản nước ép lạnh, liệu trình detox, giao hàng salad, dị ứng sauce">
+  <title>Hỏi/đáp (FAQ) — Công ty TNHH Verde Sana</title>
+  <link rel="icon" type="image/png" href="../../public/assets/images/brand/favicon.png">
 
   <!-- Google Fonts chuẩn Tiếng Việt: Lora (Tiêu đề) & Be Vietnam Pro (Nội dung) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,14 +16,15 @@
   <!-- CSS dùng chung từ public/assets/ -->
   <link rel="stylesheet" href="../../public/assets/css/variables.css">
   <link rel="stylesheet" href="../../public/assets/css/client.css">
-  <!-- Thêm CSS riêng của từng trang bên dưới dòng này nếu cần -->
+  <!-- CSS riêng [R2] Giới thiệu & Hỏi/đáp -->
+  <link rel="stylesheet" href="../../public/assets/css/about-faq.css">
 </head>
 <body>
   <!-- ==================== THANH THÔNG TIN NHANH ==================== -->
   <div class="top-bar">
     <div class="container top-bar__inner">
-      <span>Tươi mới mỗi ngày — Giao lạnh nội thành trong 45 phút</span>
-      <span>Hotline: <a href="tel:02838689999">028 3868 9999</a> | Giờ mở cửa: 07:00 – 21:00</span>
+      <span>Tươi xanh mỗi ngày – Trọn vị lành mạnh</span>
+      <span>Hotline: <a href="tel:02838689999">028 3868 9999</a> | Giờ mở cửa: 08:00 – 20:00 (Thứ Hai – Chủ Nhật)</span>
     </div>
   </div>
 
@@ -31,7 +32,7 @@
   <header id="siteHeader" class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
-        <img src="../../public/assets/images/logo-verdesana.svg" alt="Logo Công ty TNHH Verde Sana" width="42" height="42">
+        <img src="../../public/assets/images/brand/logo-verdesana.png" alt="Logo Công ty TNHH Verde Sana" width="42" height="42">
         <span class="brand__text">
           <span class="brand__name">Verde Sana</span>
           <span class="brand__tagline">FRESH SALAD & COLD-PRESSED</span>
@@ -40,12 +41,12 @@
 
       <nav id="mainNav" class="main-nav" aria-label="Điều hướng chính">
         <ul class="main-nav__list">
-          <li><a class="main-nav__link is-active" href="index.html">Trang chủ</a></li>
+          <li><a class="main-nav__link" href="index.html">Trang chủ</a></li>
           <li><a class="main-nav__link" href="about.html">Giới thiệu</a></li>
           <li><a class="main-nav__link" href="products.html">Thực đơn</a></li>
           <li><a class="main-nav__link main-nav__link--accent" href="salad-builder.html">Tự trộn Salad & Bảng giá</a></li>
           <li><a class="main-nav__link" href="news.html">Tin tức</a></li>
-          <li><a class="main-nav__link" href="faq.html">Hỏi/đáp</a></li>
+          <li><a class="main-nav__link is-active" href="faq.html" aria-current="page">Hỏi/đáp</a></li>
           <li><a class="main-nav__link" href="contact.html">Liên hệ</a></li>
         </ul>
       </nav>
@@ -62,13 +63,294 @@
     </div>
   </header>
 
-  <!-- ==================== NỘI DUNG RIÊNG CỦA TỪNG TRANG ==================== -->
+  <!-- ==================== NỘI DUNG TRANG HỎI/ĐÁP ==================== -->
   <main class="site-main">
-    <div class="container" style="padding-top: 40px; padding-bottom: 40px;">
-      <!-- Thành viên viết toàn bộ nội dung trang của mình tại đây -->
-      <h1>Tiêu đề trang mẫu</h1>
-      <p>Thay thế vùng này bằng nội dung HTML5 chuẩn W3C của trang tương ứng.</p>
-    </div>
+    <section class="page-hero page-hero--compact" aria-labelledby="faqTitle">
+      <div class="container">
+        <nav aria-label="Đường dẫn trang">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li aria-current="page">Hỏi/đáp</li>
+          </ol>
+        </nav>
+        <h1 id="faqTitle" class="page-hero__title">Câu hỏi thường gặp</h1>
+        <p class="page-hero__lead">Mọi điều bạn cần biết về đặt hàng, tự trộn Salad, nước ép lạnh, liệu trình Detox và tài khoản thành viên Verde Sana.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Danh sách câu hỏi thường gặp">
+      <div class="container faq-layout">
+        <!-- Cột trái: tìm kiếm & nhóm câu hỏi -->
+        <aside class="faq-side" aria-label="Tìm kiếm và lọc câu hỏi">
+          <form class="faq-search" action="#" method="get" role="search" id="faqSearchForm">
+            <label for="faqKeyword">Tìm nhanh câu hỏi</label>
+            <input id="faqKeyword" type="search" name="q" placeholder="Ví dụ: bảo quản, giao hàng..." autocomplete="off">
+          </form>
+
+          <h2 class="faq-side__title">Nhóm câu hỏi</h2>
+          <ul class="faq-cats" id="faqCats">
+            <li><button type="button" class="faq-cats__btn is-active" data-filter="all" aria-pressed="true">Tất cả <span class="faq-cats__count">16</span></button></li>
+            <li><button type="button" class="faq-cats__btn" data-filter="dat-hang" aria-pressed="false">Đặt hàng & Giao nhận <span class="faq-cats__count">4</span></button></li>
+            <li><button type="button" class="faq-cats__btn" data-filter="tu-tron-salad" aria-pressed="false">Build-Your-Own Salad <span class="faq-cats__count">4</span></button></li>
+            <li><button type="button" class="faq-cats__btn" data-filter="juice-detox" aria-pressed="false">Cold-Pressed Juice & Detox <span class="faq-cats__count">4</span></button></li>
+            <li><button type="button" class="faq-cats__btn" data-filter="tai-khoan" aria-pressed="false">Tài khoản & Thanh toán <span class="faq-cats__count">4</span></button></li>
+          </ul>
+        </aside>
+
+        <!-- Cột phải: danh sách Accordion -->
+        <div>
+          <div class="faq-toolbar">
+            <p class="faq-result" id="faqResult" aria-live="polite">Đang hiển thị 16 câu hỏi</p>
+            <button type="button" class="btn btn--outline" id="faqToggleAll" aria-pressed="false">Mở tất cả</button>
+          </div>
+
+          <!-- Nhóm 1 -->
+          <section class="faq-group" data-group="dat-hang" aria-labelledby="g1">
+            <h2 id="g1" class="faq-group__title">Đặt hàng & Giao nhận</h2>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+                  <span>Verde Sana giao hàng trong khu vực nào và mất bao lâu?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a1" role="region" aria-labelledby="faq-q1">
+                <div class="faq-item__body">
+                  <p>Chúng tôi giao nội thành TP. Hồ Chí Minh trong bán kính 10 km từ bếp trung tâm tại Quận 10. Đơn hàng thường đến tay bạn sau 30–45 phút kể từ khi được xác nhận.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+                  <span>Tôi có thể chọn khung giờ giao hàng không?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a2" role="region" aria-labelledby="faq-q2">
+                <div class="faq-item__body">
+                  <p>Có. Ở bước thanh toán, bạn chọn một khung giờ giao tươi trong ngày (mỗi khung 1 tiếng, từ 08:00 đến 20:00). Đơn đặt trước 10:00 có thể chọn giao trưa cùng ngày.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+                  <span>Phí giao hàng được tính như thế nào?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a3" role="region" aria-labelledby="faq-q3">
+                <div class="faq-item__body">
+                  <p>Phí giao hàng là 15.000đ cho mỗi đơn. Đơn từ 250.000đ trở lên được miễn phí giao hàng. Phí cụ thể luôn được hiển thị ở bước thanh toán trước khi bạn xác nhận đơn.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+                  <span>Tôi muốn đặt Salad cho tiệc công ty số lượng lớn thì làm sao?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a4" role="region" aria-labelledby="faq-q4">
+                <div class="faq-item__body">
+                  <p>Với đơn từ 20 phần trở lên, bạn vui lòng gửi yêu cầu tại <a href="contact.html">trang Liên hệ & Đặt tiệc doanh nghiệp</a> hoặc gọi hotline 028 3868 9999. Chúng tôi sẽ liên hệ lại trong vòng 2 giờ làm việc để tư vấn thực đơn.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Nhóm 2 -->
+          <section class="faq-group" data-group="tu-tron-salad" aria-labelledby="g2">
+            <h2 id="g2" class="faq-group__title">Build-Your-Own Salad</h2>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">
+                  <span>Tự trộn Salad hoạt động như thế nào?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a5" role="region" aria-labelledby="faq-q5">
+                <div class="faq-item__body">
+                  <p>Tại trang <a href="salad-builder.html">Tự trộn Salad & Bảng giá</a>, bạn chọn lần lượt bốn nhóm thành phần:</p>
+                  <ul>
+                    <li>Nền rau (Base) – chọn 1 loại.</li>
+                    <li>Đạm (Protein) – chọn 1 đến 2 loại.</li>
+                    <li>Topping – chọn tối đa 4 loại.</li>
+                    <li>Sauce – chọn 1 loại.</li>
+                  </ul>
+                  <p>Hệ thống tự cộng tổng tiền và tổng calo, sau đó bạn thêm thẳng tô Salad vào giỏ hàng.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q6" aria-expanded="false" aria-controls="faq-a6">
+                  <span>Tôi bị dị ứng đậu phộng, mè hoặc hải sản thì nên chọn Sauce nào?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a6" role="region" aria-labelledby="faq-q6">
+                <div class="faq-item__body">
+                  <p>Mỗi Sauce đều ghi rõ thành phần dễ gây dị ứng. Sốt mè rang có mè, sốt Thái có đậu phộng và nước mắm. Nếu bạn dị ứng, hãy chọn sốt dầu giấm Balsamic hoặc sốt chanh dây, đồng thời ghi chú dị ứng ở bước thanh toán để bếp dùng dụng cụ riêng.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q7" aria-expanded="false" aria-controls="faq-a7">
+                  <span>Lượng calo hiển thị có chính xác không?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a7" role="region" aria-labelledby="faq-q7">
+                <div class="faq-item__body">
+                  <p>Calo của từng thành phần được chuyên gia dinh dưỡng tính theo định lượng chuẩn của một phần. Tổng calo là giá trị tham khảo và có thể chênh lệch khoảng 5–10% tùy độ chín của rau củ.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q8" aria-expanded="false" aria-controls="faq-a8">
+                  <span>Tôi có thể yêu cầu ít sốt hoặc để sốt riêng không?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a8" role="region" aria-labelledby="faq-q8">
+                <div class="faq-item__body">
+                  <p>Được. Ở ô “Ghi chú ăn kiêng” khi thanh toán, bạn có thể ghi “ít sốt” hoặc “để sốt riêng”. Mặc định Verde Sana luôn đóng Sauce trong hũ riêng để rau giữ được độ giòn.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Nhóm 3 -->
+          <section class="faq-group" data-group="juice-detox" aria-labelledby="g3">
+            <h2 id="g3" class="faq-group__title">Cold-Pressed Juice & Detox</h2>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q9" aria-expanded="false" aria-controls="faq-a9">
+                  <span>Nước ép lạnh bảo quản được bao lâu?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a9" role="region" aria-labelledby="faq-q9">
+                <div class="faq-item__body">
+                  <p>Nước ép Cold-Pressed dùng ngon nhất trong 72 giờ kể từ ngày ép in trên nắp chai, khi được bảo quản liên tục ở 2–6°C. Sau khi mở nắp, bạn nên uống hết trong ngày.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q10" aria-expanded="false" aria-controls="faq-a10">
+                  <span>Vì sao nước ép bị tách lớp? Có phải bị hỏng không?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a10" role="region" aria-labelledby="faq-q10">
+                <div class="faq-item__body">
+                  <p>Không. Nước ép lạnh không dùng chất ổn định nên phần thịt quả sẽ lắng xuống tự nhiên. Bạn chỉ cần lắc đều trước khi uống. Nếu nước ép có mùi chua lạ hoặc nắp bị phồng, vui lòng không sử dụng và liên hệ để được đổi mới.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q11" aria-expanded="false" aria-controls="faq-a11">
+                  <span>Liệu trình Detox 1, 3 và 7 ngày khác nhau thế nào?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a11" role="region" aria-labelledby="faq-q11">
+                <div class="faq-item__body">
+                  <p>Mỗi ngày trong liệu trình gồm 6 chai nước ép 300ml uống cách nhau 2–3 giờ. Gói 1 ngày phù hợp để làm quen; gói 3 ngày giúp cơ thể nhẹ nhàng hơn sau những ngày ăn uống nhiều; gói 7 ngày được giao làm hai đợt để luôn đảm bảo độ tươi.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q12" aria-expanded="false" aria-controls="faq-a12">
+                  <span>Ai không nên thực hiện chế độ Detox bằng nước ép?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a12" role="region" aria-labelledby="faq-q12">
+                <div class="faq-item__body">
+                  <p>Phụ nữ mang thai hoặc cho con bú, người bệnh tiểu đường, bệnh thận hoặc đang dùng thuốc điều trị nên hỏi ý kiến bác sĩ trước khi bắt đầu. Liệu trình Detox không thay thế cho chế độ điều trị y tế.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Nhóm 4 -->
+          <section class="faq-group" data-group="tai-khoan" aria-labelledby="g4">
+            <h2 id="g4" class="faq-group__title">Tài khoản & Thanh toán</h2>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q13" aria-expanded="false" aria-controls="faq-a13">
+                  <span>Tôi có cần tạo tài khoản để đặt hàng không?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a13" role="region" aria-labelledby="faq-q13">
+                <div class="faq-item__body">
+                  <p>Không bắt buộc. Tuy nhiên khi <a href="register.html">đăng ký thành viên</a>, bạn có thể lưu địa chỉ giao hàng mặc định, xem lại lịch sử đơn và công thức các tô Salad đã tự trộn, đồng thời viết đánh giá sản phẩm.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q14" aria-expanded="false" aria-controls="faq-a14">
+                  <span>Verde Sana hỗ trợ những phương thức thanh toán nào?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a14" role="region" aria-labelledby="faq-q14">
+                <div class="faq-item__body">
+                  <p>Bạn có thể thanh toán khi nhận hàng (COD) hoặc chuyển khoản ngân hàng. Với chuyển khoản, nội dung chuyển khoản là mã đơn hàng hiển thị sau khi bạn xác nhận đặt hàng.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q15" aria-expanded="false" aria-controls="faq-a15">
+                  <span>Tôi quên mật khẩu thì phải làm sao?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a15" role="region" aria-labelledby="faq-q15">
+                <div class="faq-item__body">
+                  <p>Bạn vui lòng liên hệ hotline 028 3868 9999 hoặc gửi yêu cầu qua <a href="contact.html">trang Liên hệ</a> kèm email đã đăng ký. Quản trị viên sẽ xác minh và đặt lại mật khẩu tạm thời cho bạn; sau đó bạn nên đổi mật khẩu mới trong mục Tài khoản.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-item__q">
+                <button type="button" class="faq-item__btn" id="faq-q16" aria-expanded="false" aria-controls="faq-a16">
+                  <span>Tôi có thể hủy hoặc thay đổi đơn hàng đã đặt không?</span><span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="faq-item__panel" id="faq-a16" role="region" aria-labelledby="faq-q16">
+                <div class="faq-item__body">
+                  <p>Bạn có thể hủy hoặc đổi món khi đơn còn ở trạng thái “Chờ xác nhận”. Khi đơn đã chuyển sang “Đang pha chế”, nguyên liệu đã được chuẩn bị nên chúng tôi không thể hủy đơn.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <p class="faq-empty" id="faqEmpty" hidden>Không tìm thấy câu hỏi phù hợp. Bạn hãy thử từ khóa khác hoặc gửi câu hỏi cho chúng tôi qua trang Liên hệ.</p>
+
+          <div class="faq-help">
+            <div>
+              <h2 class="faq-help__title">Chưa tìm thấy câu trả lời?</h2>
+              <p>Đội ngũ Verde Sana luôn sẵn sàng hỗ trợ bạn từ 08:00 đến 20:00 mỗi ngày.</p>
+            </div>
+            <a href="contact.html" class="btn btn--primary">Gửi câu hỏi cho chúng tôi</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==================== FOOTER DÙNG CHUNG ==================== -->
@@ -77,7 +359,7 @@
       <div class="footer-grid">
         <div>
           <h2 class="footer-title">Công ty TNHH Verde Sana</h2>
-          <p class="footer-text">Chuyên cung cấp mô hình Build-Your-Own Salad kết hợp Sauce tự chọn, nước ép lạnh (Cold-Pressed Juice), sinh tố dinh dưỡng (Smoothie) và liệu trình Detox nguyên chất.</p>
+          <p class="footer-text">Verde Sana mang đến các lựa chọn Salad và thức uống từ nguyên liệu tươi, với thực đơn đa dạng và khả năng tùy chọn thành phần để phù hợp sở thích của mỗi khách hàng.</p>
           <p class="footer-text">Địa chỉ: 268 Lý Thường Kiệt, Quận 10, TP. Hồ Chí Minh</p>
         </div>
 
@@ -105,7 +387,7 @@
           <h2 class="footer-title">Liên hệ nhanh</h2>
           <p class="footer-text">Email: lienhe@verdesana.vn</p>
           <p class="footer-text">Hotline: 028 3868 9999</p>
-          <p class="footer-text">Thời gian phục vụ: 07:00 – 21:00 (Thứ 2 – Chủ nhật)</p>
+          <p class="footer-text">Giờ mở cửa: 08:00 – 20:00 (Thứ Hai – Chủ Nhật)</p>
         </div>
       </div>
 
@@ -121,6 +403,7 @@
   <!-- JS dùng chung từ public/assets/ -->
   <script src="../../public/assets/js/main.js"></script>
   <script src="../../public/assets/js/validator.js"></script>
-  <!-- Thêm JS riêng của từng trang (vd: salad-builder.js, cart.js, upload-preview.js) bên dưới -->
+  <!-- JS riêng [R2]: Accordion, tìm kiếm & lọc nhóm câu hỏi -->
+  <script src="../../public/assets/js/faq.js"></script>
 </body>
 </html>
